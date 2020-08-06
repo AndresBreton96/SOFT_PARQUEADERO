@@ -3,3 +3,12 @@
 ################################################################################
 
 /obj
+/Datos.Contratos/obj
+/Datos.Dapper/obj
+/Negocio.Contratos/obj
+/Negocio.General/obj
+/Presentacion.WPF/bin/Debug/netcoreapp3.1
+/Presentacion.WPF/obj
+/Transversales.Modelos/bin/Debug/netcoreapp3.1
+/Transversales.Modelos/obj
+/Transversales.Utilitarios/obj
