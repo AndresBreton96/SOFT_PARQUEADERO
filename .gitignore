@@ -12,3 +12,8 @@
 /Transversales.Modelos/bin/Debug/netcoreapp3.1
 /Transversales.Modelos/obj
 /Transversales.Utilitarios/obj
+/Datos.Contratos/bin/Debug/netcoreapp3.1
+/Datos.Dapper/bin/Debug/netcoreapp3.1
+/Negocio.Contratos/bin/Debug/netcoreapp3.1
+/Negocio.General/bin/Debug/netcoreapp3.1
+/Transversales.Utilitarios/bin/Debug/netcoreapp3.1
