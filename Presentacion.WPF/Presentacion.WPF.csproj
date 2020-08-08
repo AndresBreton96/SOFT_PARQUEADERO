@@ -6,4 +6,19 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Datos.Dapper\Datos.Dapper.csproj" />
+    <ProjectReference Include="..\Negocio.Contratos\Negocio.Contratos.csproj" />
+    <ProjectReference Include="..\Negocio.General\Negocio.General.csproj" />
+    <ProjectReference Include="..\Transversales.Modelos\Transversales.Modelos.csproj" />
+  </ItemGroup>
+
 </Project>
