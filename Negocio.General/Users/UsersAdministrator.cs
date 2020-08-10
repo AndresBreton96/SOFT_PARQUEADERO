@@ -1,7 +1,10 @@
 ﻿using Datos.Contratos;
 using Microsoft.AspNet.Identity;
 using Negocio.Contratos.Users;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Transversales.Modelos;
 using Transversales.Modelos.Exceptions;
@@ -38,6 +41,18 @@ namespace Negocio.General.Users
             {
                 throw new InvalidPasswordException(username, password);
             }
+
+            var menusObject = _repositorio.ExecuteQueryObject($"SELECT * FROM UsersMenu WHERE UserId = {user.UserId} AND Permiso = 1");
+
+            if(menusObject == null)
+            {
+                throw new UserNotFoundException($"El usuario {username} no tiene menús asignados.",username);
+            }
+
+            var userMenus = JsonConvert.DeserializeObject<IEnumerable<UsersMenu>>(JsonConvert.SerializeObject(menusObject));
+
+            user.Menus = userMenus;
+
             return user;
         }
 

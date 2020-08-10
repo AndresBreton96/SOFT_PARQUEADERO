@@ -3,6 +3,7 @@ using Presentacion.WPF.State.Navigators;
 using Presentacion.WPF.ViewModels;
 using System;
 using System.Windows.Input;
+using Transversales.Modelos.Exceptions;
 
 namespace Presentacion.WPF.Commands
 {
@@ -35,11 +36,22 @@ namespace Presentacion.WPF.Commands
 
         public void Execute(object parameter)
         {
-            bool success = _authenticator.Login(_loginViewModel.Username, parameter.ToString());
-
-            if (success)
+            try
             {
-                _renavigator.Renavigate();
+                bool success = _authenticator.Login(_loginViewModel.Username, parameter.ToString());
+
+                if (success)
+                {
+                    _renavigator.Renavigate();
+                }
+            }
+            catch (UserNotFoundException userEx)
+            {
+                throw userEx;
+            }
+            catch (InvalidPasswordException passEx)
+            {
+                throw passEx;
             }
         }
 

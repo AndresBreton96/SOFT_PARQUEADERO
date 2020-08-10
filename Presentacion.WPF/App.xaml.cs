@@ -72,6 +72,11 @@ namespace Presentacion.WPF
                 return () => services.GetRequiredService<HomeViewModel>();
             });
 
+            services.AddSingleton<CreateViewModel<ModifyPricesViewModel>>(services =>
+            {
+                return () => services.GetRequiredService<ModifyPricesViewModel>();
+            });
+
             services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services =>
             {
@@ -85,6 +90,7 @@ namespace Presentacion.WPF
             services.AddSingleton<IAccountStore, AccountStore>();
             services.AddScoped<MainViewModel>();
             services.AddScoped<HomeViewModel>();
+            services.AddScoped<ModifyPricesViewModel>();
 
 
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));

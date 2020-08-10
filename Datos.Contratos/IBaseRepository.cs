@@ -6,6 +6,8 @@ namespace Datos.Contratos
     {
         IEnumerable<T> ExecuteQuery(string query);
 
+        IEnumerable<object> ExecuteQueryObject(string query);
+
         IEnumerable<T> GetAll();
 
         IEnumerable<T> GetAll(string where);

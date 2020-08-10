@@ -17,6 +17,11 @@ namespace Datos.Dapper.Users
             return _cnn.Query<T>(query);
         }
 
+        public IEnumerable<object> ExecuteQueryObject(string query)
+        {
+            return _cnn.Query<object>(query);
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _cnn.GetList<T>();

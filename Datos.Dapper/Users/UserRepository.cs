@@ -16,11 +16,6 @@ namespace Datos.Dapper.Users
         #endregion
 
         #region Metodos
-        public async Task<SystemUsers> ValidateLogIn(string username, string password)
-        {
-            var response = await ExecuteSP("ValidateLogIn", new { username, password });
-            return response.FirstOrDefault();
-        }
 
         #endregion
 

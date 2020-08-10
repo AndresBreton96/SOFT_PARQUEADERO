@@ -6,10 +6,11 @@ namespace Presentacion.WPF.ViewModels.Factories
     public class ViewModelFactory : IViewModelFactory
     {
         #region Constructor
-        public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<LoginViewModel> createLoginViewModel)
+        public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<LoginViewModel> createLoginViewModel, CreateViewModel<ModifyPricesViewModel> createModifyPricesViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createLoginViewModel = createLoginViewModel;
+            _createModifyPricesViewModel = createModifyPricesViewModel;
         }
 
         #endregion
@@ -17,6 +18,7 @@ namespace Presentacion.WPF.ViewModels.Factories
         #region Variables
         private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
+        private readonly CreateViewModel<ModifyPricesViewModel> _createModifyPricesViewModel;
 
         #endregion
 
@@ -29,6 +31,8 @@ namespace Presentacion.WPF.ViewModels.Factories
                     return _createLoginViewModel();
                 case ViewType.Home:
                     return _createHomeViewModel();
+                case ViewType.ModifyPrices:
+                    return _createModifyPricesViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }

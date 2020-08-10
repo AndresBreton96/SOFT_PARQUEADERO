@@ -6,7 +6,8 @@ namespace Presentacion.WPF.State.Navigators
     public enum ViewType
     {
         Login,
-        Home
+        Home,
+        ModifyPrices
     }
 
     public interface INavigator

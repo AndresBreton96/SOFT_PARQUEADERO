@@ -2,6 +2,7 @@
 using Presentacion.WPF.State.Accounts;
 using System;
 using Transversales.Modelos;
+using Transversales.Modelos.Exceptions;
 
 namespace Presentacion.WPF.State.Authenticators
 {
@@ -41,9 +42,15 @@ namespace Presentacion.WPF.State.Authenticators
             {
                 CurrentUser = _authenticationService.ValidateLogIn(username, password);
             }
-            catch (Exception)
+            catch (UserNotFoundException userEx)
             {
                 success = false;
+                throw userEx;
+            }
+            catch (InvalidPasswordException passEx)
+            {
+                success = false;
+                throw passEx;
             }
 
             return success;

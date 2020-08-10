@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Transversales.Modelos.Exceptions;
 
 namespace Presentacion.WPF.Views
 {
@@ -35,7 +36,23 @@ namespace Presentacion.WPF.Views
             if (LoginCommand != null)
             {
                 string password = pbPassword.Password;
-                LoginCommand.Execute(password);
+                try
+                {
+                    LoginCommand.Execute(password);
+                }
+                catch (UserNotFoundException userEx)
+                {
+                    if (!string.IsNullOrEmpty(userEx.Message))
+                        LogInErrorText.Text = userEx.Message;
+                    else
+                        LogInErrorText.Text = $"El usuario {userEx.Username} no se ha encontrado en la base de datos.";
+                    LogInErrorText.Visibility = Visibility.Visible;
+                }
+                catch (InvalidPasswordException passEx)
+                {
+                    LogInErrorText.Text = $"La contraseña ingresada para el usuario {passEx.Username} es incorrecta, por favor intente nuevamente.";
+                    LogInErrorText.Visibility = Visibility.Visible;
+                }
             }
         }
 
