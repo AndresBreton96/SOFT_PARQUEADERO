@@ -25,6 +25,10 @@
             <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#689f38"/>
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
 
+            <DataTemplate DataType="{x:Type viewmodels:ModifyPricesViewModel}">
+                <views:ModifyPricesView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView/>
             </DataTemplate>
