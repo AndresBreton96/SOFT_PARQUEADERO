@@ -8,14 +8,18 @@ namespace Presentacion.WPF.State.Authenticators
 {
     public class Authenticator : IAuthenticator
     {
-        private readonly IUsersAdministrator _authenticationService;
-        private readonly IAccountStore _accountStore;
-
+        #region Constructor
         public Authenticator(IUsersAdministrator authenticationService, IAccountStore accountStore)
         {
             _authenticationService = authenticationService;
             _accountStore = accountStore;
         }
+
+        #endregion
+
+        #region Variables
+        private readonly IUsersAdministrator _authenticationService;
+        private readonly IAccountStore _accountStore;
 
         public SystemUsers CurrentUser
         {
@@ -34,6 +38,9 @@ namespace Presentacion.WPF.State.Authenticators
 
         public event Action StateChanged;
 
+        #endregion
+
+        #region Methods
         public bool Login(string username, string password)
         {
             bool success = true;
@@ -60,6 +67,8 @@ namespace Presentacion.WPF.State.Authenticators
         {
             CurrentUser = null;
         }
+
+        #endregion
 
         //public async Task<RegistrationResult> Register(string email, string username, string password, string confirmPassword)
         //{

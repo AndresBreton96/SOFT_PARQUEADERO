@@ -9,12 +9,33 @@ namespace Presentacion.WPF.ViewModels
     public class HomeViewModel : ViewModelBase
     {
         #region Constructor
-        public HomeViewModel()
+        public HomeViewModel(IAccountStore accountStore)
         {
+            _accountStore = accountStore;
 
+			_username = _accountStore.CurrentUser.UserName;
         }
 
         #endregion
 
-    }
+        #region Variables
+        private readonly IAccountStore _accountStore;
+
+		private string _username = "";
+		public string Username
+		{
+			get
+			{
+				return _username;
+			}
+			set
+			{
+				_username = value;
+				OnPropertyChanged(nameof(Username));
+			}
+		}
+
+		#endregion
+
+	}
 }

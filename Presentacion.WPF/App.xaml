@@ -26,7 +26,7 @@
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
 
             <DataTemplate DataType="{x:Type viewmodels:ModifyPricesViewModel}">
-                <views:ModifyPricesView/>
+                <views:ModifyPricesView SaveRateCommand="{Binding SaveRateCommand}"/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">

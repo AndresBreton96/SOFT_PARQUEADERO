@@ -69,7 +69,8 @@ namespace Presentacion.WPF
 
             services.AddSingleton<CreateViewModel<HomeViewModel>>(services =>
             {
-                return () => services.GetRequiredService<HomeViewModel>();
+                return () => new HomeViewModel(
+                    services.GetRequiredService<IAccountStore>());
             });
 
             services.AddSingleton<CreateViewModel<ModifyPricesViewModel>>(services =>

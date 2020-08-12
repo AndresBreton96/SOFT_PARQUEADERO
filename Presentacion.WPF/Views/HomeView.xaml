@@ -18,13 +18,16 @@
             </Grid.ColumnDefinitions>
             <materialDesign:PackIcon Kind="Parking" Width="100" Height="100" />
             <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
-                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Welcome to Material Design In XAML Toolkit</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap" Text="BIENVENIDO "/>
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                         CommandParameter="{x:Static Dock.Left}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Binoculars" />
-                        <TextBlock Margin="8 0 0 0">EXPLORE</TextBlock>
+                        <TextBlock Margin="8 0 0 0">MENÚ</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>

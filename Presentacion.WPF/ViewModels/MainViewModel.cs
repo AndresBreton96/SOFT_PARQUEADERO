@@ -40,6 +40,20 @@ namespace Presentacion.WPF.ViewModels
 
         public bool IsLoggedIn => _authenticator.IsLoggedIn;
 
+        private string _username = "";
+        public string Username
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                _username = value;
+                OnPropertyChanged(nameof(Username));
+            }
+        }
+
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
 
         private ObservableCollection<MenuItem> _menuItems;
@@ -107,7 +121,7 @@ namespace Presentacion.WPF.ViewModels
         {
             var menusReturn = new ObservableCollection<MenuItem>
             {
-                new MenuItem("Home", new HomeView { DataContext = new HomeViewModel() }, ViewType.Home)
+                new MenuItem("Home", new HomeView { DataContext = new HomeViewModel(_accountStore) }, ViewType.Home)
             };
 
             foreach (var menu in menus)
@@ -123,7 +137,7 @@ namespace Presentacion.WPF.ViewModels
                         flag = true;
                         break;
                     default:
-                        content = new HomeView { DataContext = new HomeViewModel() };
+                        content = new HomeView { DataContext = new HomeViewModel(_accountStore) };
                         viewType = ViewType.Home;
                         flag = true;
                         break;

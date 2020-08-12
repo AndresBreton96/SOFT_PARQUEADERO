@@ -95,7 +95,7 @@
                                 <Button x:Name="LogOutBtn" Content="Salir" Click="LogOutBtn_Click"/>
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" AutomationProperties.Name="Material Design In XAML Toolkit">Material Design In XAML Toolkit</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" AutomationProperties.Name="Material Design In XAML Toolkit">PARQUEADERO LA SEXTA</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>

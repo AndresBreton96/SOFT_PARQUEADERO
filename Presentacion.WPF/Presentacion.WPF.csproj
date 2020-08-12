@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Negocio.Contratos\Negocio.Contratos.csproj" />
     <ProjectReference Include="..\Negocio.General\Negocio.General.csproj" />
     <ProjectReference Include="..\Transversales.Modelos\Transversales.Modelos.csproj" />
+    <ProjectReference Include="..\Transversales.Utilitarios\Transversales.Utilitarios.csproj" />
   </ItemGroup>
 
 </Project>

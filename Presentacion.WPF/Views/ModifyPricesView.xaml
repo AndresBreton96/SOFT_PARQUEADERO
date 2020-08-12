@@ -4,32 +4,148 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Presentacion.WPF.Views" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <materialDesign:PackIcon Kind="Parking" Width="100" Height="100" />
-            <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
-                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Modificar Tarifas</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Binoculars" />
-                        <TextBlock Margin="8 0 0 0">EXPLORE</TextBlock>
+    <ScrollViewer>
+        <materialDesign:Card Width="600" Height="1000">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="CurrencyUsd" Width="100" Height="100" />
+                    <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Modificar Tarifas</TextBlock>
                     </StackPanel>
-                </Button>
-            </StackPanel>
-        </Grid>
-            
-    </Grid>
+                </Grid>
+
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Grid.Row="1" HorizontalAlignment="Center">Agregar/Modificar Tarifa</TextBlock>
+
+                <materialDesign:Card Grid.Row="2" Width="420" Height="270">
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            x:Name="RateId"
+                            Grid.Row="0"
+                            materialDesign:HintAssist.Hint="0"
+                            IsEnabled="False"
+                            Width="10"
+                            HorizontalAlignment="Left"/>
+                        <TextBox
+                            x:Name="RateDescription"
+                            Grid.Row="1"
+                            materialDesign:HintAssist.Hint="Descripcion"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" 
+                            IsEnabled="False"/>
+                        <ComboBox
+                            x:Name="RateTypesCbo"
+                            Grid.Row="2"
+                            materialDesign:HintAssist.Hint="Tipo de tarifa"
+                            materialDesign:ComboBoxAssist.ClassicMode="{Binding ShowItem}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            IsEnabled="False">
+                        </ComboBox>
+                        <TextBox
+                            x:Name="RateValue"
+                            Grid.Row="3"
+                            materialDesign:HintAssist.Hint="Valor"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" 
+                            IsEnabled="False"/>
+                        <TextBox
+                            x:Name="RateTime"
+                            Grid.Row="4"
+                            materialDesign:HintAssist.Hint="Tiempo"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" 
+                            IsEnabled="False"/>
+                        <Button
+                            x:Name="AddBtn"
+                            Grid.Row="5"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Click="AddBtn_Click"
+                            ToolTip="Adicionar una nueva tarifa"
+                            Visibility="Visible"
+                            Margin="0 5 0 0" >
+                            ADICIONAR
+                        </Button>
+                        <StackPanel
+                            x:Name="ChangesPnl"
+                            Grid.Row="5"
+                            Orientation="Horizontal"
+                            Visibility="Hidden"
+                            Margin="0 5 0 0" >
+                            <Button
+                                x:Name="SaveBtn"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="SaveBtn_Click"
+                                ToolTip="Guardar los cambios">
+                                GUARDAR
+                            </Button>
+                            <Button
+                                x:Name="CancelBtn"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="CancelBtn_Click"
+                                ToolTip="Cancelar el proceso">
+                                CANCELAR
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
+
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 15 0 0" Grid.Row="3" HorizontalAlignment="Center">Tarifas Actuales</TextBlock>
+
+                <ListView ItemsSource="{Binding Items1}" Grid.Row="4" HorizontalAlignment="Center">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding RateId}" Header="Id" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Descripcion" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="TipoTarifa" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Valor" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Tiempo (minutos)" />
+                            <GridViewColumn Header="Modificar">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button>
+
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Eliminar">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button>
+
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+        </materialDesign:Card>
+    </ScrollViewer>
 </UserControl>
