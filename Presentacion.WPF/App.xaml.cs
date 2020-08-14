@@ -1,8 +1,12 @@
 ﻿using Datos.Contratos;
+using Datos.Contratos.Rates;
+using Datos.Dapper.RatesRepositories;
 using Datos.Dapper.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Negocio.Contratos.Rates;
 using Negocio.Contratos.Users;
+using Negocio.General.Rates;
 using Negocio.General.Users;
 using Presentacion.WPF.State.Accounts;
 using Presentacion.WPF.State.Authenticators;
@@ -52,11 +56,13 @@ namespace Presentacion.WPF
             #region Dependency Layers
             #region Business Layer
             services.AddSingleton<IUsersAdministrator, UsersAdministrator>();
+            services.AddSingleton<IRatesAdministrator, RatesAdministrator>();
 
             #endregion
 
             #region Data Layer
             services.AddSingleton<IUsersRepository, UserRepository>();
+            services.AddSingleton<IRatesRepository, RatesRepository>();
 
             services.AddSingleton(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             #endregion
@@ -75,7 +81,8 @@ namespace Presentacion.WPF
 
             services.AddSingleton<CreateViewModel<ModifyPricesViewModel>>(services =>
             {
-                return () => services.GetRequiredService<ModifyPricesViewModel>();
+                return () => new ModifyPricesViewModel(
+                    services.GetRequiredService<IRatesAdministrator>());
             });
 
             services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();

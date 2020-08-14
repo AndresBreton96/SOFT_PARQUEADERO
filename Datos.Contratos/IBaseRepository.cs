@@ -16,6 +16,8 @@ namespace Datos.Contratos
 
         IEnumerable<T> GetAll(ref int count, string where, int pagina, int numRegistros, string order);
 
+        int GetLastId(string keyName);
+
         object Add(T modelo);
 
         object Update(T modelo);

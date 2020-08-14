@@ -132,12 +132,12 @@ namespace Presentacion.WPF.ViewModels
                 switch (menu.MenuView)
                 {
                     case "ModifyPricesView":
-                        content = new ModifyPricesView { DataContext = new ModifyPricesViewModel() };
+                        content = new ModifyPricesView();
                         viewType = ViewType.ModifyPrices;
                         flag = true;
                         break;
                     default:
-                        content = new HomeView { DataContext = new HomeViewModel(_accountStore) };
+                        content = new HomeView();
                         viewType = ViewType.Home;
                         flag = true;
                         break;

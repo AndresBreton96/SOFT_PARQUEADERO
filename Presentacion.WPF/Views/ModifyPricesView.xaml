@@ -63,7 +63,8 @@
                             materialDesign:HintAssist.Hint="Tipo de tarifa"
                             materialDesign:ComboBoxAssist.ClassicMode="{Binding ShowItem}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                            IsEnabled="False">
+                            IsEnabled="False"
+                            LostFocus="RateTypesCbo_LostFocus">
                         </ComboBox>
                         <TextBox
                             x:Name="RateValue"
@@ -115,7 +116,7 @@
 
                 <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 15 0 0" Grid.Row="3" HorizontalAlignment="Center">Tarifas Actuales</TextBlock>
 
-                <ListView ItemsSource="{Binding Items1}" Grid.Row="4" HorizontalAlignment="Center">
+                <ListView ItemsSource="{Binding SearchRatesResultSymbol}" Grid.Row="4" HorizontalAlignment="Center" x:Name="RatesListView">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding RateId}" Header="Id" />
@@ -126,8 +127,9 @@
                             <GridViewColumn Header="Modificar">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button>
-
+                                        <Button
+                                            x:Name="ModifyRateButton"
+                                            Click="ModifyRateButton_Click">
                                         </Button>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -135,7 +137,9 @@
                             <GridViewColumn Header="Eliminar">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button>
+                                        <Button
+                                            x:Name="DeleteRateButton"
+                                            Click="DeleteRateButton_Click">
 
                                         </Button>
                                     </DataTemplate>

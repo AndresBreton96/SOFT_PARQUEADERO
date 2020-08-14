@@ -43,6 +43,11 @@ namespace Datos.Dapper.Users
             return _cnn.GetListPaged<T>(pagina, numRegistros, where, order);
         }
 
+        public int GetLastId(string keyName)
+        {
+            return _cnn.Query<int>($"SELECT TOP 1 {keyName} FROM {typeof(T).Name} ORDER BY {keyName} DESC ").FirstOrDefault();
+        }
+
         public object Add(T modelo)
         {
             return _cnn.Insert<T>(modelo);

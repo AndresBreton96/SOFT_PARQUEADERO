@@ -15,7 +15,7 @@ namespace Datos.Dapper.Users
 
         #endregion
 
-        #region Metodos
+        #region Methods
 
         #endregion
 

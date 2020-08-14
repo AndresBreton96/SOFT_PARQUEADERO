@@ -1,4 +1,7 @@
-﻿using Presentacion.WPF.Commands;
+﻿using Negocio.Contratos.Rates;
+using Presentacion.WPF.Commands;
+using Presentacion.WPF.Commands.Rates;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Transversales.Modelos;
@@ -8,30 +11,43 @@ namespace Presentacion.WPF.ViewModels
     public class ModifyPricesViewModel : ViewModelBase
     {
         #region Constructor
-        public ModifyPricesViewModel()
+        public ModifyPricesViewModel(IRatesAdministrator ratesAdministrator)
         {
-            SaveRateCommand = new SaveRateCommand(this);
+            _ratesAdministrator = ratesAdministrator;
+            SaveRateCommand = new SaveRateCommand(this, ratesAdministrator);
+            SearchRatesCommand = new SearchRatesCommand(this, ratesAdministrator);
+            DropRateCommand = new DropRateCommand(this, ratesAdministrator);
+            UpdateRateCommand = new UpdateRateCommand(this, ratesAdministrator);
+            SearchRatesCommand.Execute(null);
         }
 
         #endregion
 
         #region Variables
+        public IRatesAdministrator _ratesAdministrator;
+
         private bool ShowItem = true;
 
-        private ObservableCollection<Rates> _rates;
+        public ICommand SaveRateCommand { get; }
+        public ICommand SearchRatesCommand { get; }
+        public ICommand DropRateCommand { get; }
+        public ICommand UpdateRateCommand { get; }
 
-        public ObservableCollection<Rates> Rates
+        private IEnumerable<RatesByTime> _searchRatesResultSymbol = new List<RatesByTime>();
+        public IEnumerable<RatesByTime> SearchRatesResultSymbol
         {
-            get => _rates;
+            get
+            {
+                return _searchRatesResultSymbol;
+            }
             set
             {
-                _rates = value;
-                OnPropertyChanged(nameof(Rates));
+                _searchRatesResultSymbol = value;
+                OnPropertyChanged(nameof(SearchRatesResultSymbol));
             }
         }
 
-        public ICommand SaveRateCommand { get; }
-
+        public RatesByTime EditingRate;
         #endregion
     }
 }
