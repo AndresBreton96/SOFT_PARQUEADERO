@@ -6,11 +6,15 @@ namespace Presentacion.WPF.ViewModels.Factories
     public class ViewModelFactory : IViewModelFactory
     {
         #region Constructor
-        public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<LoginViewModel> createLoginViewModel, CreateViewModel<ModifyPricesViewModel> createModifyPricesViewModel)
+        public ViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel, 
+                                CreateViewModel<LoginViewModel> createLoginViewModel, 
+                                CreateViewModel<ModifyPricesViewModel> createModifyPricesViewModel,
+                                CreateViewModel<RegisterEntryViewModel> createRegisterEntryViewModel) 
         {
             _createHomeViewModel = createHomeViewModel;
             _createLoginViewModel = createLoginViewModel;
             _createModifyPricesViewModel = createModifyPricesViewModel;
+            _createRegisterEntryViewModel = createRegisterEntryViewModel;
         }
 
         #endregion
@@ -19,10 +23,11 @@ namespace Presentacion.WPF.ViewModels.Factories
         private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<ModifyPricesViewModel> _createModifyPricesViewModel;
+        private readonly CreateViewModel<RegisterEntryViewModel> _createRegisterEntryViewModel;
 
         #endregion
 
-        #region Metodos
+        #region Methods
         public ViewModelBase CreateViewModel(ViewType viewType)
         {
             switch (viewType)
@@ -33,6 +38,8 @@ namespace Presentacion.WPF.ViewModels.Factories
                     return _createHomeViewModel();
                 case ViewType.ModifyPrices:
                     return _createModifyPricesViewModel();
+                case ViewType.RegisterEntry:
+                    return _createRegisterEntryViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }

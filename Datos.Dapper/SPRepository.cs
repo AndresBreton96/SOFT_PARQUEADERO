@@ -23,7 +23,7 @@ namespace Datos.Dapper
 
         #endregion
 
-        #region Metodos
+        #region Methods
         public async Task<IEnumerable<T>> ExecuteSP(string nombre, object parametros)
         {
             try

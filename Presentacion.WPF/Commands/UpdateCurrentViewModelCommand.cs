@@ -24,7 +24,7 @@ namespace Presentacion.WPF.Commands
 
         #endregion
 
-        #region Eventos
+        #region Events
         public bool CanExecute(object parameter)
         {
             return true;

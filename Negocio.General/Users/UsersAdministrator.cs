@@ -28,7 +28,7 @@ namespace Negocio.General.Users
 
         #endregion
 
-        #region Metodos
+        #region Methods
         public SystemUsers ValidateLogIn(string username, string password)
         {
             var user = _repositorio.GetAll($"WHERE UserName = '{username}'").FirstOrDefault();

@@ -25,6 +25,11 @@
             <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#689f38"/>
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
 
+            <DataTemplate DataType="{x:Type viewmodels:RegisterEntryViewModel}">
+                <views:RegisterEntryView
+                    SaveEntryTicketCommand="{Binding SaveEntryTicketCommand}"/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:ModifyPricesViewModel}">
                 <views:ModifyPricesView 
                     UpdateRateCommand="{Binding UpdateRateCommand}"

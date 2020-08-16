@@ -10,7 +10,7 @@ namespace Presentacion.WPF.Views
     /// </summary>
     public partial class LoginView : UserControl
     {
-        #region Metodos
+        #region Constructor
         public LoginView()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace Presentacion.WPF.Views
 
         #endregion
 
-        #region Eventos
+        #region Events
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             if (LoginCommand != null)

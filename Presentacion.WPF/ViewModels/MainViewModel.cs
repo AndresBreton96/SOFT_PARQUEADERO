@@ -97,7 +97,7 @@ namespace Presentacion.WPF.ViewModels
 
         #endregion
 
-        #region Eventos
+        #region Events
         private void Authenticator_StateChanged()
         {
             OnPropertyChanged(nameof(IsLoggedIn));
@@ -116,7 +116,7 @@ namespace Presentacion.WPF.ViewModels
 
         #endregion
 
-        #region Metodos
+        #region Methods
         private ObservableCollection<MenuItem> GenerateMenuItems(IEnumerable<UsersMenu> menus)
         {
             var menusReturn = new ObservableCollection<MenuItem>
@@ -134,6 +134,11 @@ namespace Presentacion.WPF.ViewModels
                     case "ModifyPricesView":
                         content = new ModifyPricesView();
                         viewType = ViewType.ModifyPrices;
+                        flag = true;
+                        break;
+                    case "RegisterEntryView":
+                        content = new RegisterEntryView();
+                        viewType = ViewType.RegisterEntry;
                         flag = true;
                         break;
                     default:

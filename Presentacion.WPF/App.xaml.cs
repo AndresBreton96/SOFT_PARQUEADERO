@@ -1,13 +1,17 @@
 ﻿using Datos.Contratos;
 using Datos.Contratos.Rates;
+using Datos.Contratos.VehiclesRegistration;
 using Datos.Dapper.RatesRepositories;
 using Datos.Dapper.Users;
+using Datos.Dapper.VehiclesRegistration;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Negocio.Contratos.Rates;
 using Negocio.Contratos.Users;
+using Negocio.Contratos.VehiclesRegistration;
 using Negocio.General.Rates;
 using Negocio.General.Users;
+using Negocio.General.VehiclesRegistration;
 using Presentacion.WPF.State.Accounts;
 using Presentacion.WPF.State.Authenticators;
 using Presentacion.WPF.State.Navigators;
@@ -57,12 +61,14 @@ namespace Presentacion.WPF
             #region Business Layer
             services.AddSingleton<IUsersAdministrator, UsersAdministrator>();
             services.AddSingleton<IRatesAdministrator, RatesAdministrator>();
+            services.AddSingleton<ITicketsAdministrator, TicketsAdministrator>();
 
             #endregion
 
             #region Data Layer
             services.AddSingleton<IUsersRepository, UserRepository>();
             services.AddSingleton<IRatesRepository, RatesRepository>();
+            services.AddSingleton<ITicketsRepository, TicketsRepository>();
 
             services.AddSingleton(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             #endregion
@@ -85,8 +91,15 @@ namespace Presentacion.WPF
                     services.GetRequiredService<IRatesAdministrator>());
             });
 
+            services.AddSingleton<CreateViewModel<RegisterEntryViewModel>>(services =>
+            {
+                return () => new RegisterEntryViewModel(
+                    services.GetRequiredService<ITicketsAdministrator>());
+            });
+
             services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<ModifyPricesViewModel>>();
+            services.AddSingleton<ViewModelDelegateRenavigator<RegisterEntryViewModel>>();
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services =>
             {
                 return () => new LoginViewModel(
@@ -100,6 +113,7 @@ namespace Presentacion.WPF
             services.AddScoped<MainViewModel>();
             services.AddScoped<HomeViewModel>();
             services.AddScoped<ModifyPricesViewModel>();
+            services.AddScoped<RegisterEntryViewModel>();
 
 
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
