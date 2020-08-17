@@ -141,6 +141,11 @@ namespace Presentacion.WPF.ViewModels
                         viewType = ViewType.RegisterEntry;
                         flag = true;
                         break;
+                    case "RegisterDepartureView":
+                        content = new RegisterDepartureView();
+                        viewType = ViewType.RegisterDeparture;
+                        flag = true;
+                        break;
                     default:
                         content = new HomeView();
                         viewType = ViewType.Home;

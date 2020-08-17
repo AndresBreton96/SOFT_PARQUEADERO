@@ -62,6 +62,7 @@ namespace Presentacion.WPF
             services.AddSingleton<IUsersAdministrator, UsersAdministrator>();
             services.AddSingleton<IRatesAdministrator, RatesAdministrator>();
             services.AddSingleton<ITicketsAdministrator, TicketsAdministrator>();
+            services.AddSingleton<IBillsAdministrator, BillsAdministrator>();
 
             #endregion
 
@@ -69,6 +70,7 @@ namespace Presentacion.WPF
             services.AddSingleton<IUsersRepository, UserRepository>();
             services.AddSingleton<IRatesRepository, RatesRepository>();
             services.AddSingleton<ITicketsRepository, TicketsRepository>();
+            services.AddSingleton<IBillsRepository, BillsRepository>();
 
             services.AddSingleton(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             #endregion
@@ -97,9 +99,18 @@ namespace Presentacion.WPF
                     services.GetRequiredService<ITicketsAdministrator>());
             });
 
+            services.AddSingleton<CreateViewModel<RegisterDepartureViewModel>>(services =>
+            {
+                return () => new RegisterDepartureViewModel(
+                    services.GetRequiredService<ITicketsAdministrator>(),
+                    services.GetRequiredService<IRatesAdministrator>(),
+                    services.GetRequiredService<IBillsAdministrator>());
+            });
+
             services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<ModifyPricesViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<RegisterEntryViewModel>>();
+            services.AddSingleton<ViewModelDelegateRenavigator<RegisterDepartureViewModel>>();
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services =>
             {
                 return () => new LoginViewModel(
@@ -114,6 +125,7 @@ namespace Presentacion.WPF
             services.AddScoped<HomeViewModel>();
             services.AddScoped<ModifyPricesViewModel>();
             services.AddScoped<RegisterEntryViewModel>();
+            services.AddScoped<RegisterDepartureViewModel>();
 
 
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));

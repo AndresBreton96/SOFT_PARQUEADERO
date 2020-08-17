@@ -10,7 +10,9 @@ namespace Negocio.Contratos.VehiclesRegistration
 
         Tickets GetAll(int ticketId);
 
-        Tickets GetEntryTicket(string licensePlate);
+        Tickets GetDepartureTicket(int ticketId);
+
+        Tickets GetEntryTicket(string licensePlate, bool ignoreDepartureTicket = false);
 
         void AddTicket(Tickets ticket);
     }
