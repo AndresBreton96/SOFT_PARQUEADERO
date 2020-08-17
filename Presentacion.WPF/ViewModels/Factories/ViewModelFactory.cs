@@ -10,13 +10,15 @@ namespace Presentacion.WPF.ViewModels.Factories
                                 CreateViewModel<LoginViewModel> createLoginViewModel,
                                 CreateViewModel<ModifyPricesViewModel> createModifyPricesViewModel,
                                 CreateViewModel<RegisterEntryViewModel> createRegisterEntryViewModel,
-                                CreateViewModel<RegisterDepartureViewModel> createRegisterDepartureViewModel)
+                                CreateViewModel<RegisterDepartureViewModel> createRegisterDepartureViewModel, 
+                                CreateViewModel<SearchTicketsViewModel> createSearchTicketsViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createLoginViewModel = createLoginViewModel;
             _createModifyPricesViewModel = createModifyPricesViewModel;
             _createRegisterEntryViewModel = createRegisterEntryViewModel;
             _createRegisterDepartureViewModel = createRegisterDepartureViewModel;
+            _createSearchTicketsViewModel = createSearchTicketsViewModel;
         }
 
         #endregion
@@ -27,6 +29,7 @@ namespace Presentacion.WPF.ViewModels.Factories
         private readonly CreateViewModel<ModifyPricesViewModel> _createModifyPricesViewModel;
         private readonly CreateViewModel<RegisterEntryViewModel> _createRegisterEntryViewModel;
         private readonly CreateViewModel<RegisterDepartureViewModel> _createRegisterDepartureViewModel;
+        private readonly CreateViewModel<SearchTicketsViewModel> _createSearchTicketsViewModel;
 
         #endregion
 
@@ -45,6 +48,8 @@ namespace Presentacion.WPF.ViewModels.Factories
                     return _createRegisterEntryViewModel();
                 case ViewType.RegisterDeparture:
                     return _createRegisterDepartureViewModel();
+                case ViewType.SearchTickets:
+                    return _createSearchTicketsViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }

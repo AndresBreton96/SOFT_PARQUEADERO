@@ -9,12 +9,13 @@ namespace Transversales.Modelos.RegistrationEntries
         public DateTime EntryDate { get; set; }
         public EntryType EntryType { get; set; }
         public int EntryTicketId { get; set; }
+        public string EntryTypeName { get; set; }
     }
 
     public enum EntryType : byte
     {
         Vacio = 0,
-        Entrance = 1,
-        Departure = 2
+        Entrada = 1,
+        Salida = 2
     }
 }

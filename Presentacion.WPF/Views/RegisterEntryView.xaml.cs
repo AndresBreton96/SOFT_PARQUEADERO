@@ -62,7 +62,7 @@ namespace Presentacion.WPF.Views
                 EntryDate = DateTime.Now,
                 EntryTicketId = 0,
                 LicensePlate = plates,
-                EntryType = EntryType.Entrance,
+                EntryType = EntryType.Entrada,
                 TicketId = 0
             };
 

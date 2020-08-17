@@ -9,7 +9,8 @@ namespace Presentacion.WPF.State.Navigators
         Home,
         ModifyPrices,
         RegisterEntry,
-        RegisterDeparture
+        RegisterDeparture,
+        SearchTickets
     }
 
     public interface INavigator

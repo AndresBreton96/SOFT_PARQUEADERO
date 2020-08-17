@@ -74,7 +74,7 @@ namespace Presentacion.WPF.ViewModels
                     {
                         TicketId = 0,
                         EntryTicketId = 0,
-                        EntryType = EntryType.Departure,
+                        EntryType = EntryType.Salida,
                         LicensePlate = Plates,
                         EntryDate = DepartureTime
                     };

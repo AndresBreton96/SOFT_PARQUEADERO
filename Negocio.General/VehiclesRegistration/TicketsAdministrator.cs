@@ -29,10 +29,16 @@ namespace Negocio.General.VehiclesRegistration
         {
             var tickets = _repositorio.ExecuteQuery($@"SELECT * 
                                                        FROM Tickets 
-                                                       WHERE CAST(EntryDate AS date) >= '{initialDate:dd/MM/yyyy}' AND CAST(EntryDate AS date) < '{finalDate:dd/MM/yyyy}' AND
+                                                       WHERE CAST(EntryDate AS date) >= '{initialDate:yyyy/MM/dd}' AND CAST(EntryDate AS date) < '{finalDate:yyyy/MM/dd}' AND
                                                              (0 = {(byte)entryType} OR EntryType = {(byte)entryType}) AND LicensePlate LIKE '%{licensePlate.Replace(' ', '%')}%'");
             if (tickets.Any())
+            {
+                foreach(var ticket in tickets)
+                {
+                    ticket.EntryTypeName = Enum.GetName(typeof(EntryType), ticket.EntryType);
+                }
                 return tickets;
+            }
 
             throw new TicketNotFoundException();
         }
@@ -59,7 +65,7 @@ namespace Negocio.General.VehiclesRegistration
         {
             var ticket = _repositorio.ExecuteQuery($@"SELECT * 
                                                       FROM Tickets 
-                                                      WHERE LicensePlate = '{licensePlate}' AND EntryType = {(byte)EntryType.Entrance}
+                                                      WHERE LicensePlate = '{licensePlate}' AND EntryType = {(byte)EntryType.Entrada}
                                                       ORDER BY TicketId Desc");
             if (ticket.Any())
             {
@@ -81,9 +87,9 @@ namespace Negocio.General.VehiclesRegistration
             {
                 var lastId = _repositorio.GetLastId("TicketId");
 
-                if (ticket.EntryType == EntryType.Entrance)
+                if (ticket.EntryType == EntryType.Entrada)
                 {
-                    var entryTicket = _repositorio.ExecuteQuery($"SELECT * FROM Tickets WHERE LicensePlate = '{ticket.LicensePlate}' AND EntryType = {(byte)EntryType.Entrance} ORDER BY TicketId Desc");
+                    var entryTicket = _repositorio.ExecuteQuery($"SELECT * FROM Tickets WHERE LicensePlate = '{ticket.LicensePlate}' AND EntryType = {(byte)EntryType.Entrada} ORDER BY TicketId Desc");
                     if (entryTicket.Any())
                     {
                         var departureTicket = _repositorio.ExecuteQuery($"SELECT * FROM Tickets WHERE EntryTicketId = {entryTicket.FirstOrDefault().TicketId}");
@@ -93,7 +99,7 @@ namespace Negocio.General.VehiclesRegistration
                     }
 
                 }
-                if (ticket.EntryType == EntryType.Departure)
+                if (ticket.EntryType == EntryType.Salida)
                 {
                     var entryTicket = _repositorio.ExecuteQuery($"SELECT * FROM Tickets WHERE TicketId = {ticket.EntryTicketId}");
                     if (!entryTicket.Any())

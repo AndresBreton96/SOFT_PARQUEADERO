@@ -40,7 +40,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
                 if (parameter is Tickets)
                 {
                     Tickets ticket = (Tickets)parameter;
-                    ticket.EntryType = EntryType.Departure;
+                    ticket.EntryType = EntryType.Salida;
 
                     var entryTicket = _ticketsAdministrator.GetEntryTicket(ticket.LicensePlate);
                     ticket.EntryTicketId = entryTicket.TicketId;

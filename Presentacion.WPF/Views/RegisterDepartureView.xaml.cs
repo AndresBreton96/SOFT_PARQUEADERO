@@ -108,7 +108,7 @@ namespace Presentacion.WPF.Views
                         {
                             TicketId = 0,
                             EntryTicketId = 0,
-                            EntryType = EntryType.Departure,
+                            EntryType = EntryType.Salida,
                             LicensePlate = PlatesTextBox.Text,
                             EntryDate = ((RegisterDepartureViewModel)DataContext).DepartureTime
                         };

@@ -1,6 +1,8 @@
 ﻿using Negocio.Contratos.VehiclesRegistration;
 using Presentacion.WPF.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Transversales.Modelos.Exceptions;
@@ -8,19 +10,19 @@ using Transversales.Modelos.RegistrationEntries;
 
 namespace Presentacion.WPF.Commands.VehiclesRegistration
 {
-    public class SaveEntryTicketCommand : ICommand
+    public class SearchTicketsCommand : ICommand
     {
         #region Constructor
-        public SaveEntryTicketCommand(RegisterEntryViewModel registerEntryViewModel, ITicketsAdministrator ticketsAdministrator)
+        public SearchTicketsCommand(SearchTicketsViewModel searchTicketsViewModel, ITicketsAdministrator ticketsAdministrator)
         {
-            _registerEntryViewModel = registerEntryViewModel;
+            _searchTicketsViewModel = searchTicketsViewModel;
             _ticketsAdministrator = ticketsAdministrator;
         }
 
         #endregion
 
         #region Variables
-        private readonly RegisterEntryViewModel _registerEntryViewModel;
+        private readonly SearchTicketsViewModel _searchTicketsViewModel;
         private readonly ITicketsAdministrator _ticketsAdministrator;
 
         public event EventHandler CanExecuteChanged;
@@ -37,16 +39,17 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
         {
             try
             {
-                if(parameter is Tickets)
+                if(parameter == null)
                 {
-                    Tickets ticket = (Tickets)parameter;
-                    ticket.EntryType = EntryType.Entrada;
-                    _ticketsAdministrator.AddTicket(ticket);
+                    var ticketsFound = _ticketsAdministrator.GetAll(_searchTicketsViewModel.InitialDate, _searchTicketsViewModel.FinalDate, _searchTicketsViewModel.EntryType, _searchTicketsViewModel.LicensePlate);
+                    if (ticketsFound == null || !ticketsFound.Any())
+                        ticketsFound = new List<Tickets>();
+                    _searchTicketsViewModel.SearchTicketsResultSymbol = ticketsFound;
                 }
             }
-            catch (EntryTicketAlreadyRegistered ex)
+            catch (TicketNotFoundException ex)
             {
-                MessageBox.Show($"El vehículo de placas {ex.LicensePlate} se encuentra registrado dentro del parqueadero y no se ha registrado su salida.");
+                _searchTicketsViewModel.SearchTicketsResultSymbol = new List<Tickets>();
             }
             catch (Exception ex)
             {
@@ -55,5 +58,6 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
         }
 
         #endregion
+
     }
 }
