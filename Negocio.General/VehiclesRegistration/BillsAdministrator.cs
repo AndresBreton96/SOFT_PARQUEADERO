@@ -2,6 +2,7 @@
 using Negocio.Contratos.VehiclesRegistration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Transactions;
 using Transversales.Modelos.VehiclesRegistration;
 
@@ -28,6 +29,19 @@ namespace Negocio.General.VehiclesRegistration
             return _repositorio.GetAll();
         }
 
+        public IEnumerable<Bills> GetAll(DateTime initialDate, DateTime finalDate, string licensePlate)
+        {
+            var query = $@"SELECT * 
+                           FROM Bills 
+                           WHERE CAST(BillDate AS date) >= '{initialDate:yyyy/MM/dd}' AND CAST(BillDate AS date) < '{finalDate:yyyy/MM/dd}'
+                                 AND LicensePlate LIKE '%{licensePlate.Replace(' ', '%')}%'";
+
+            var bills = _repositorio.ExecuteQuery(query);
+            if (bills.Any())
+                return bills;
+            return new List<Bills>();
+        }
+
         public void AddBill(Bills bill)
         {
             try
@@ -46,7 +60,8 @@ namespace Negocio.General.VehiclesRegistration
                                                     ,{bill.DepartureTicketId}
                                                     ,{bill.Rate}
                                                     ,'{bill.EntryDate:yyyy-MM-dd HH:mm:ss}'
-                                                    ,'{bill.DepartureDate:yyyy-MM-dd HH:mm:ss}')");
+                                                    ,'{bill.DepartureDate:yyyy-MM-dd HH:mm:ss}'
+                                                    ,GETDATE())");
 
                     scope.Complete();
                 }

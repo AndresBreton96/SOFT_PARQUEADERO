@@ -54,6 +54,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                _searchTicketsViewModel.SearchTicketsResultSymbol = new List<Tickets>();
             }
         }
 

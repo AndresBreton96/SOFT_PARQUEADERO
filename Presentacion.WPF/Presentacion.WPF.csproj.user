@@ -20,6 +20,9 @@
     <Compile Update="Views\RegisterEntryView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SearchBillsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SearchTicketsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,6 +44,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RegisterEntryView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SearchBillsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SearchTicketsView.xaml">

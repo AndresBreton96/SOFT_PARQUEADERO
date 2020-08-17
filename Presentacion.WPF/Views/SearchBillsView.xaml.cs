@@ -1,40 +1,35 @@
 ﻿using Presentacion.WPF.ViewModels;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Transversales.Modelos.RegistrationEntries;
 
 namespace Presentacion.WPF.Views
 {
     /// <summary>
-    /// Lógica de interacción para SearchTicketsView.xaml
+    /// Lógica de interacción para SearchBillsView.xaml
     /// </summary>
-    public partial class SearchTicketsView : UserControl
+    public partial class SearchBillsView : UserControl
     {
         #region Constructor
-        public SearchTicketsView()
+        public SearchBillsView()
         {
             InitializeComponent();
+
             InitialDatePicker.DisplayDateEnd = DateTime.Today;
             FinalDatePicker.DisplayDateEnd = DateTime.Today;
-
-            var entryTypes = Enum.GetValues(typeof(EntryType)).Cast<EntryType>();
-
-            EntryTypesCbo.ItemsSource = entryTypes;
         }
 
         #endregion
 
         #region Variables
-        public static readonly DependencyProperty SearchTicketsCommandProperty =
-            DependencyProperty.Register("SearchTicketsCommand", typeof(ICommand), typeof(SearchTicketsView), new PropertyMetadata(null));
+        public static readonly DependencyProperty SearchBillsCommandProperty =
+            DependencyProperty.Register("SearchBillsCommand", typeof(ICommand), typeof(SearchBillsView), new PropertyMetadata(null));
 
-        public ICommand SearchTicketsCommand
+        public ICommand SearchBillsCommand
         {
-            get { return (ICommand)GetValue(SearchTicketsCommandProperty); }
-            set { SetValue(SearchTicketsCommandProperty, value); }
+            get { return (ICommand)GetValue(SearchBillsCommandProperty); }
+            set { SetValue(SearchBillsCommandProperty, value); }
         }
 
         #endregion
@@ -42,14 +37,13 @@ namespace Presentacion.WPF.Views
         #region Events
         private void InitialDatePicker_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(FinalDatePicker.SelectedDate < InitialDatePicker.SelectedDate)
+            if (FinalDatePicker.SelectedDate < InitialDatePicker.SelectedDate)
             {
                 MessageBox.Show("La fecha final debe ser mayor a la inicial, intente nuevamente");
                 return;
             }
 
             Search();
-
         }
 
         private void FinalDatePicker_LostFocus(object sender, RoutedEventArgs e)
@@ -57,29 +51,6 @@ namespace Presentacion.WPF.Views
             if (FinalDatePicker.SelectedDate > InitialDatePicker.SelectedDate)
             {
                 MessageBox.Show("La fecha final no debe ser menor a la inicial, intente nuevamente");
-                return;
-            }
-
-            Search();
-        }
-
-        private void EntryTypesCbo_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (InitialDatePicker.SelectedDate == DateTime.MinValue || InitialDatePicker.SelectedDate == null)
-            {
-                MessageBox.Show("Por favor seleccione una fecha inicial e intente nuevamente");
-                return;
-            }
-
-            if (FinalDatePicker.SelectedDate == DateTime.MinValue || FinalDatePicker.SelectedDate == null)
-            {
-                MessageBox.Show("Por favor seleccione una fecha final e intente nuevamente");
-                return;
-            }
-
-            if(EntryTypesCbo.SelectedIndex == -1)
-            {
-                MessageBox.Show("Por favor seleccione un tipo de movimiento e intente nuevamente");
                 return;
             }
 
@@ -104,12 +75,6 @@ namespace Presentacion.WPF.Views
                         return;
                     }
 
-                    if (EntryTypesCbo.SelectedIndex == -1)
-                    {
-                        MessageBox.Show("Por favor seleccione un tipo de movimiento e intente nuevamente");
-                        return;
-                    }
-
                     Search();
                     break;
                 default:
@@ -124,10 +89,10 @@ namespace Presentacion.WPF.Views
         {
             try
             {
-                if(SearchTicketsCommand != null)
+                if (SearchBillsCommand != null)
                 {
-                    ((SearchTicketsViewModel)DataContext).LicensePlate = LicenseTextBox.Text;
-                    SearchTicketsCommand.Execute(null);
+                    ((SearchBillsViewModel)DataContext).LicensePlate = LicenseTextBox.Text;
+                    SearchBillsCommand.Execute(null);
                 }
             }
             catch (Exception ex)

@@ -151,6 +151,11 @@ namespace Presentacion.WPF.ViewModels
                         viewType = ViewType.SearchTickets;
                         flag = true;
                         break;
+                    case "SearchBillsView":
+                        content = new SearchBillsView();
+                        viewType = ViewType.SearchBills;
+                        flag = true;
+                        break;
                     default:
                         content = new HomeView();
                         viewType = ViewType.Home;

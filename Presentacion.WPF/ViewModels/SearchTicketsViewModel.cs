@@ -2,9 +2,7 @@
 using Presentacion.WPF.Commands.VehiclesRegistration;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using Transversales.Modelos;
 using Transversales.Modelos.RegistrationEntries;
 
 namespace Presentacion.WPF.ViewModels

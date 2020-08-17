@@ -25,6 +25,11 @@
             <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#689f38"/>
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
 
+            <DataTemplate DataType="{x:Type viewmodels:SearchBillsViewModel}">
+                <views:SearchBillsView
+                    SearchBillsCommand="{Binding SearchBillsCommand}"/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:SearchTicketsViewModel}">
                 <views:SearchTicketsView
                     SearchTicketsCommand="{Binding SearchTicketsCommand}"/>

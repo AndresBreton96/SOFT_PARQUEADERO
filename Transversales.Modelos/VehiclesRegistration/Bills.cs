@@ -13,5 +13,6 @@ namespace Transversales.Modelos.VehiclesRegistration
         public double Rate { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime DepartureDate { get; set; }
+        public DateTime BillDate { get; set; }
     }
 }

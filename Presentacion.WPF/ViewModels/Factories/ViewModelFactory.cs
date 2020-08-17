@@ -10,8 +10,9 @@ namespace Presentacion.WPF.ViewModels.Factories
                                 CreateViewModel<LoginViewModel> createLoginViewModel,
                                 CreateViewModel<ModifyPricesViewModel> createModifyPricesViewModel,
                                 CreateViewModel<RegisterEntryViewModel> createRegisterEntryViewModel,
-                                CreateViewModel<RegisterDepartureViewModel> createRegisterDepartureViewModel, 
-                                CreateViewModel<SearchTicketsViewModel> createSearchTicketsViewModel)
+                                CreateViewModel<RegisterDepartureViewModel> createRegisterDepartureViewModel,
+                                CreateViewModel<SearchTicketsViewModel> createSearchTicketsViewModel, 
+                                CreateViewModel<SearchBillsViewModel> createSearchBillsViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createLoginViewModel = createLoginViewModel;
@@ -19,6 +20,7 @@ namespace Presentacion.WPF.ViewModels.Factories
             _createRegisterEntryViewModel = createRegisterEntryViewModel;
             _createRegisterDepartureViewModel = createRegisterDepartureViewModel;
             _createSearchTicketsViewModel = createSearchTicketsViewModel;
+            _createSearchBillsViewModel = createSearchBillsViewModel;
         }
 
         #endregion
@@ -30,6 +32,7 @@ namespace Presentacion.WPF.ViewModels.Factories
         private readonly CreateViewModel<RegisterEntryViewModel> _createRegisterEntryViewModel;
         private readonly CreateViewModel<RegisterDepartureViewModel> _createRegisterDepartureViewModel;
         private readonly CreateViewModel<SearchTicketsViewModel> _createSearchTicketsViewModel;
+        private readonly CreateViewModel<SearchBillsViewModel> _createSearchBillsViewModel;
 
         #endregion
 
@@ -50,6 +53,8 @@ namespace Presentacion.WPF.ViewModels.Factories
                     return _createRegisterDepartureViewModel();
                 case ViewType.SearchTickets:
                     return _createSearchTicketsViewModel();
+                case ViewType.SearchBills:
+                    return _createSearchBillsViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }
