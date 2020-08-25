@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Transversales.Modelos;
+using Transversales.Utilitarios.Tools;
 
 namespace Presentacion.WPF.ViewModels
 {
@@ -121,7 +122,7 @@ namespace Presentacion.WPF.ViewModels
         {
             var menusReturn = new ObservableCollection<MenuItem>
             {
-                new MenuItem("Home", new HomeView { DataContext = new HomeViewModel(_accountStore) }, ViewType.Home)
+                new MenuItem(ResourcesReader.GetPropertyWithLanguage("MenuNames", "Home"), new HomeView { DataContext = new HomeViewModel(_accountStore) }, ViewType.Home)
             };
 
             foreach (var menu in menus)
@@ -156,6 +157,11 @@ namespace Presentacion.WPF.ViewModels
                         viewType = ViewType.SearchBills;
                         flag = true;
                         break;
+                    case "UsersView":
+                        content = new UsersView();
+                        viewType = ViewType.Users;
+                        flag = true;
+                        break;
                     default:
                         content = new HomeView();
                         viewType = ViewType.Home;
@@ -165,8 +171,9 @@ namespace Presentacion.WPF.ViewModels
 
                 if (flag)
                 {
-                    var menuItem = new MenuItem(menu.MenuName, content, viewType);
+                    var menuItem = new MenuItem(ResourcesReader.GetPropertyWithLanguage("MenuNames", menu.MenuView), content, viewType);
                     menusReturn.Add(menuItem);
+
                 }
             }
             return menusReturn;

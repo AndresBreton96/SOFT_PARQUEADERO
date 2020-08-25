@@ -22,6 +22,11 @@ namespace Datos.Dapper.Users
             return _cnn.Query<object>(query);
         }
 
+        public int ExecuteQueryInt(string query)
+        {
+            return _cnn.Query<int>(query).FirstOrDefault();
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _cnn.GetList<T>();
@@ -46,6 +51,11 @@ namespace Datos.Dapper.Users
         public int GetLastId(string keyName)
         {
             return _cnn.Query<int>($"SELECT TOP 1 {keyName} FROM {typeof(T).Name} ORDER BY {keyName} DESC ").FirstOrDefault();
+        }
+
+        public int GetConsecutive(string keyName)
+        {
+            return _cnn.Query<int>($"SELECT TOP 1 Consecutive FROM {typeof(T).Name} ORDER BY {keyName} DESC ").FirstOrDefault();
         }
 
         public object Add(T modelo)

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuNames>
+  <Home>
+    <es-CO>Inicio</es-CO>
+  </Home>
+  <ModifyPricesView>
+    <es-CO>ModificarPrecios</es-CO>
+  </ModifyPricesView>
+  <RegisterEntryView>
+    <es-CO>Registrar Entrada</es-CO>
+  </RegisterEntryView>
+  <RegisterDepartureView>
+    <es-CO>Registrar Salida</es-CO>
+  </RegisterDepartureView>
+  <SearchTicketsView>
+    <es-CO>Buscar Registros</es-CO>
+  </SearchTicketsView>
+  <SearchBillsView>
+    <es-CO>Buscar Facturas</es-CO>
+  </SearchBillsView>
+  <UsersView>
+    <es-CO>Usuarios</es-CO>
+  </UsersView>
+</MenuNames>

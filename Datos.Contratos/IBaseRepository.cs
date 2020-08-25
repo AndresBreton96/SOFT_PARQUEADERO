@@ -8,6 +8,8 @@ namespace Datos.Contratos
 
         IEnumerable<object> ExecuteQueryObject(string query);
 
+        int ExecuteQueryInt(string query);
+
         IEnumerable<T> GetAll();
 
         IEnumerable<T> GetAll(string where);
@@ -17,6 +19,8 @@ namespace Datos.Contratos
         IEnumerable<T> GetAll(ref int count, string where, int pagina, int numRegistros, string order);
 
         int GetLastId(string keyName);
+
+        int GetConsecutive(string keyName);
 
         object Add(T modelo);
 

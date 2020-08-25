@@ -11,7 +11,8 @@ namespace Presentacion.WPF.State.Navigators
         RegisterEntry,
         RegisterDeparture,
         SearchTickets,
-        SearchBills
+        SearchBills,
+        Users
     }
 
     public interface INavigator

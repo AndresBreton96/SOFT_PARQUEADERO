@@ -119,12 +119,20 @@ namespace Presentacion.WPF
                     services.GetRequiredService<IBillsAdministrator>());
             });
 
+            services.AddSingleton<CreateViewModel<UsersViewModel>>(services =>
+            {
+                return () => new UsersViewModel(
+                    services.GetRequiredService<IUsersAdministrator>(),
+                    services.GetRequiredService<IAuthenticator>());
+            });
+
             services.AddSingleton<ViewModelDelegateRenavigator<HomeViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<ModifyPricesViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<RegisterEntryViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<RegisterDepartureViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<SearchTicketsViewModel>>();
             services.AddSingleton<ViewModelDelegateRenavigator<SearchBillsViewModel>>();
+            services.AddSingleton<ViewModelDelegateRenavigator<UsersViewModel>>();
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services =>
             {
                 return () => new LoginViewModel(
@@ -142,6 +150,7 @@ namespace Presentacion.WPF
             services.AddScoped<RegisterDepartureViewModel>();
             services.AddScoped<SearchTicketsViewModel>();
             services.AddScoped<SearchBillsViewModel>();
+            services.AddScoped<UsersViewModel>();
 
 
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));

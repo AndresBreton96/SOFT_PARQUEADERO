@@ -6,6 +6,10 @@ namespace Transversales.Modelos.Exceptions
     {
         public string Username { get; set; }
 
+        public UserNotFoundException()
+        {
+        }
+
         public UserNotFoundException(string username)
         {
             Username = username;

@@ -11,8 +11,8 @@ namespace Presentacion.WPF.ViewModels.Factories
                                 CreateViewModel<ModifyPricesViewModel> createModifyPricesViewModel,
                                 CreateViewModel<RegisterEntryViewModel> createRegisterEntryViewModel,
                                 CreateViewModel<RegisterDepartureViewModel> createRegisterDepartureViewModel,
-                                CreateViewModel<SearchTicketsViewModel> createSearchTicketsViewModel, 
-                                CreateViewModel<SearchBillsViewModel> createSearchBillsViewModel)
+                                CreateViewModel<SearchTicketsViewModel> createSearchTicketsViewModel,
+                                CreateViewModel<SearchBillsViewModel> createSearchBillsViewModel, CreateViewModel<UsersViewModel> createUsersViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createLoginViewModel = createLoginViewModel;
@@ -21,6 +21,7 @@ namespace Presentacion.WPF.ViewModels.Factories
             _createRegisterDepartureViewModel = createRegisterDepartureViewModel;
             _createSearchTicketsViewModel = createSearchTicketsViewModel;
             _createSearchBillsViewModel = createSearchBillsViewModel;
+            _createUsersViewModel = createUsersViewModel;
         }
 
         #endregion
@@ -33,6 +34,7 @@ namespace Presentacion.WPF.ViewModels.Factories
         private readonly CreateViewModel<RegisterDepartureViewModel> _createRegisterDepartureViewModel;
         private readonly CreateViewModel<SearchTicketsViewModel> _createSearchTicketsViewModel;
         private readonly CreateViewModel<SearchBillsViewModel> _createSearchBillsViewModel;
+        private readonly CreateViewModel<UsersViewModel> _createUsersViewModel;
 
         #endregion
 
@@ -55,6 +57,8 @@ namespace Presentacion.WPF.ViewModels.Factories
                     return _createSearchTicketsViewModel();
                 case ViewType.SearchBills:
                     return _createSearchBillsViewModel();
+                case ViewType.Users:
+                    return _createUsersViewModel();
                 default:
                     throw new ArgumentException("The ViewType does not have a ViewModel.", "viewType");
             }

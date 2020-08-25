@@ -26,6 +26,9 @@
     <Compile Update="Views\SearchTicketsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\UsersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\SampleMessageDialog.xaml">
@@ -50,6 +53,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SearchTicketsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UsersView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

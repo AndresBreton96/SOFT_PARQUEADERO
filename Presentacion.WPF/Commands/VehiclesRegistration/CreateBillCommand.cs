@@ -76,6 +76,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
                     var bill = new Bills()
                     {
                         BillId = 0,
+                        Consecutive = 0,
                         LicensePlate = (string)parameter,
                         EntryTicketId = entryTicket.TicketId,
                         DepartureTicketId = departureTicket.TicketId,

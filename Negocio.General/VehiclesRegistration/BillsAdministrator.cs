@@ -3,8 +3,11 @@ using Negocio.Contratos.VehiclesRegistration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Transactions;
 using Transversales.Modelos.VehiclesRegistration;
+using Transversales.Utilitarios.Enums;
+using Transversales.Utilitarios.Tools;
 
 namespace Negocio.General.VehiclesRegistration
 {
@@ -47,12 +50,18 @@ namespace Negocio.General.VehiclesRegistration
             try
             {
                 var lastId = _repositorio.GetLastId("BillId");
+                var consecutive = _repositorio.GetConsecutive("BillId");
+                var maxConsecutive = _repositorio.ExecuteQueryInt($"SELECT Value FROM LocalParameters WHERE Id = {Convert.ToInt32(ResourcesReader.GetProperty("LocalParameters",LocalParameterEnum.MaximumConsecutive.ToString()))}");
+
+                if (consecutive >= maxConsecutive)
+                    consecutive = 0;
 
                 using (var scope = new TransactionScope())
                 {
                     _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[Bills]
                                                  VALUES
                                                     ({lastId + 1}
+                                                    ,{consecutive + 1}
                                                     ,'{bill.LicensePlate}'
                                                     ,{bill.ParkingCharged}
                                                     ,{bill.ParkingTime}

@@ -5,6 +5,7 @@ namespace Transversales.Modelos.VehiclesRegistration
     public class Bills
     {
         public int BillId { get; set; }
+        public int Consecutive { get; set; }
         public string LicensePlate { get; set; }
         public double ParkingCharged { get; set; }
         public double ParkingTime { get; set; }
