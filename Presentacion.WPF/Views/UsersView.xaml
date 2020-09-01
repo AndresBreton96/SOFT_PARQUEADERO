@@ -72,18 +72,18 @@
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" 
                             IsEnabled="False"/>
-                        <TextBox
+                        <PasswordBox
                             x:Name="PasswordTxtBox"
                             Grid.Row="4"
                             materialDesign:HintAssist.Hint="Contraseña"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                             VerticalAlignment="Center" 
                             IsEnabled="False"/>
-                        <TextBox
+                        <PasswordBox
                             x:Name="PasswordConfirmationTxtBox"
                             Grid.Row="5"
                             materialDesign:HintAssist.Hint="Confirmar Contraseña"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                             VerticalAlignment="Center" 
                             IsEnabled="False"/>
                         <Button
@@ -131,7 +131,8 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox
-                                            Style="{StaticResource MaterialDesignCheckBox}">
+                                            Style="{StaticResource MaterialDesignCheckBox}"
+                                            IsChecked="{Binding Permission}">
                                         </CheckBox>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

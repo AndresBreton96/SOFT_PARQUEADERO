@@ -26,7 +26,8 @@
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
 
             <DataTemplate DataType="{x:Type viewmodels:UsersViewModel}">
-                <views:UsersView/>
+                <views:UsersView
+                    AddUserCommand="{Binding AddUserCommand}"/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SearchBillsViewModel}">

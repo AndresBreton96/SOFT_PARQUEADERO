@@ -1,6 +1,8 @@
 ﻿using Negocio.Contratos.Users;
+using Presentacion.WPF.Commands.Users;
 using Presentacion.WPF.State.Authenticators;
 using System.Collections.Generic;
+using System.Windows.Input;
 using Transversales.Modelos;
 
 namespace Presentacion.WPF.ViewModels
@@ -12,6 +14,8 @@ namespace Presentacion.WPF.ViewModels
         {
             _usersAdministrator = usersAdministrator;
             _authenticator = authenticator;
+
+            AddUserCommand = new AddUserCommand(this, _usersAdministrator);
         }
 
         #endregion
@@ -34,6 +38,11 @@ namespace Presentacion.WPF.ViewModels
                 OnPropertyChanged(nameof(SearchMenusResultSymbol));
             }
         }
+
+        #region Commands
+        public ICommand AddUserCommand { get; set; }
+
+        #endregion
 
         #endregion
     }

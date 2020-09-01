@@ -90,13 +90,15 @@ namespace Negocio.General.Users
 
         public void AddUser(SystemUsers user)
         {
-            try
-            {
-                var lastId = _repositorio.GetLastId("UserId");
+            var lastId = _repositorio.GetLastId("UserId");
 
-                using (var scope = new TransactionScope())
-                {
-                    _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[Bills]
+            var userName = _repositorio.GetAll($"WHERE UserName = '{user.UserName}'");
+            if (userName.Any())
+                throw new UserNameAlreadyExistsException(user.UserName);
+
+            using (var scope = new TransactionScope())
+            {
+                _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[SystemUsers]
                                                  VALUES
                                                     ({lastId + 1}
                                                     ,'{user.FirstName}'
@@ -105,24 +107,19 @@ namespace Negocio.General.Users
                                                     ,'{_passwordHasher.HashPassword(user.Password)}'
                                                     ,GETDATE())");
 
-                    foreach (var menu in user.Menus)
-                    {
-                        _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[UsersMenu]
+                foreach (var menu in user.Menus)
+                {
+                    _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[UsersMenu]
                                                      VALUES
                                                         ({lastId + 1}
                                                         ,{menu.MenuId}
                                                         ,'{menu.MenuView}'
                                                         ,'{menu.Permission}')");
-                    }
-
-                    scope.Complete();
                 }
 
+                scope.Complete();
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
         }
 
         public IEnumerable<UsersMenu> LoadMenus()
