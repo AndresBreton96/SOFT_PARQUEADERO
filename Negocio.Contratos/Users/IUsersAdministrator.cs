@@ -11,7 +11,11 @@ namespace Negocio.Contratos.Users
 
         SystemUsers GetUser(int id);
 
+        SystemUsers GetFullUser(int id);
+
         void AddUser(SystemUsers user);
+
+        void UpdateUser(SystemUsers user);
 
         IEnumerable<UsersMenu> LoadMenus();
     }

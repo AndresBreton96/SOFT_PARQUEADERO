@@ -61,11 +61,11 @@ namespace Negocio.General.Users
 
         public SystemUsers GetUser(int id)
         {
-            var user = _repositorio.GetAll($"WHERE Id = {id}").FirstOrDefault();
+            var user = _repositorio.GetAll($"WHERE UserId = {id}").FirstOrDefault();
             if (user == null)
                 throw new UserNotFoundException();
 
-            var menusObject = _repositorio.ExecuteQueryObject($"SELECT * FROM UsersMenu WHERE UserId = {user.UserId} AND Permiso = 1");
+            var menusObject = _repositorio.ExecuteQueryObject($"SELECT * FROM UsersMenu WHERE UserId = {user.UserId} AND Permission = 1");
 
             if (menusObject == null)
             {
@@ -74,6 +74,32 @@ namespace Negocio.General.Users
 
             var userMenus = JsonConvert.DeserializeObject<IEnumerable<UsersMenu>>(JsonConvert.SerializeObject(menusObject));
 
+            foreach (var menu in userMenus)
+                menu.MenuName = ResourcesReader.GetPropertyWithLanguage("MenuNames", menu.MenuView);
+
+            user.Menus = userMenus;
+
+            return user;
+        }
+
+        public SystemUsers GetFullUser(int id)
+        {
+            var user = _repositorio.GetAll($"WHERE UserId = {id}").FirstOrDefault();
+            if (user == null)
+                throw new UserNotFoundException();
+
+            var menusObject = _repositorio.ExecuteQueryObject($"SELECT * FROM UsersMenu WHERE UserId = {user.UserId}");
+
+            if (menusObject == null)
+            {
+                throw new UserNotFoundException($"El usuario {user.UserName} no tiene menús asignados.", user.UserName);
+            }
+
+            var userMenus = JsonConvert.DeserializeObject<IEnumerable<UsersMenu>>(JsonConvert.SerializeObject(menusObject));
+
+            foreach (var menu in userMenus)
+                menu.MenuName = ResourcesReader.GetPropertyWithLanguage("MenuNames", menu.MenuView);
+
             user.Menus = userMenus;
 
             return user;
@@ -81,7 +107,13 @@ namespace Negocio.General.Users
 
         public IEnumerable<SystemUsers> SearchUsers(string searchParameter)
         {
-            var users = _repositorio.GetAll($"WHERE UserName = '{searchParameter}' OR FirstName = '{searchParameter}' OR LastName = '{searchParameter}' OR Id = {searchParameter} ");
+            searchParameter = searchParameter.Replace(' ', '%');
+            var outInt = 0;
+            var users = _repositorio.GetAll(@$"
+                            WHERE UserName LIKE '%{searchParameter}%' OR 
+                                  FirstName LIKE '%{searchParameter}%' OR 
+                                  LastName LIKE '%{searchParameter}%' OR 
+                                  UserId = {(int.TryParse(searchParameter, out outInt) ? Convert.ToInt32(searchParameter).ToString() : "0")} ");
             if (users == null)
                 throw new UserNotFoundException(searchParameter);
 
@@ -115,6 +147,34 @@ namespace Negocio.General.Users
                                                         ,{menu.MenuId}
                                                         ,'{menu.MenuView}'
                                                         ,'{menu.Permission}')");
+                }
+
+                scope.Complete();
+            }
+
+        }
+
+        public void UpdateUser(SystemUsers user)
+        {
+            var existingUser = _repositorio.GetAll($"WHERE UserId = {user.UserId}");
+            if (!existingUser.Any())
+                throw new UserDoesNotExistException(user.UserId);
+
+
+            using (var scope = new TransactionScope())
+            {
+                _repositorio.ExecuteQuery($@"UPDATE [dbo].[SystemUsers]
+                                             SET FirstName = '{user.FirstName}',
+                                                 LastName = '{user.LastName}',
+                                                 UserName = '{user.UserName}'
+                                                 {(!string.IsNullOrEmpty(user.Password) ? ",Password = '" + _passwordHasher.HashPassword(user.Password) + "'" : "")}
+                                             WHERE UserId = {user.UserId}");
+
+                foreach (var menu in user.Menus)
+                {
+                    _repositorio.ExecuteQuery($@"UPDATE [dbo].[UsersMenu]
+                                                 SET Permission = '{menu.Permission}'
+                                                 WHERE UserId = {menu.UserId} AND MenuId = {menu.MenuId}");
                 }
 
                 scope.Complete();

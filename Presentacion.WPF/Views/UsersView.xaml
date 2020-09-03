@@ -86,16 +86,27 @@
                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                             VerticalAlignment="Center" 
                             IsEnabled="False"/>
-                        <Button
-                            x:Name="AddBtn"
+                        <StackPanel
+                            x:Name="SelectionPnl"
                             Grid.Row="6"
-                            Style="{StaticResource MaterialDesignFlatButton}"
-                            Click="AddBtn_Click"
-                            ToolTip="Adicionar una nueva tarifa"
+                            Orientation="Horizontal"
                             Visibility="Visible"
                             Margin="0 5 0 0" >
-                            ADICIONAR
-                        </Button>
+                            <Button
+                                x:Name="AddBtn"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="AddBtn_Click"
+                                ToolTip="Adicionar un nuevo usuaro">
+                                    ADICIONAR
+                            </Button>
+                            <Button
+                                x:Name="ModifyBtn"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="ModifyBtn_Click"
+                                ToolTip="Buscar y modificar un usuario existente" >
+                                    BUSCAR
+                            </Button>
+                        </StackPanel>
                         <StackPanel
                             x:Name="ChangesPnl"
                             Grid.Row="6"
@@ -115,6 +126,14 @@
                                 Click="CancelBtn_Click"
                                 ToolTip="Cancelar el proceso">
                                 CANCELAR
+                            </Button>
+                            <Button
+                                x:Name="ChangePasswordBtn"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="ChangePasswordBtn_Click"
+                                ToolTip="Cambiar la contraseña"
+                                Visibility="Hidden">
+                                CAMBIAR CONTRASEÑA
                             </Button>
                         </StackPanel>
                     </Grid>

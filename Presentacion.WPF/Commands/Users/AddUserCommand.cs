@@ -42,8 +42,16 @@ namespace Presentacion.WPF.Commands.Users
                 if (parameter is SystemUsers)
                 {
                     SystemUsers user = (SystemUsers)parameter;
-                    _usersAdministrator.AddUser(user);
-                    MessageBox.Show("Usuario agregado con éxito.");
+                    if(user.UserId != 0)
+                    {
+                        _usersAdministrator.UpdateUser(user);
+                        MessageBox.Show("Usuario modificado con éxito.");
+                    }
+                    else
+                    {
+                        _usersAdministrator.AddUser(user);
+                        MessageBox.Show("Usuario agregado con éxito.");
+                    }
                 }
             }
             catch(UserNameAlreadyExistsException ex)

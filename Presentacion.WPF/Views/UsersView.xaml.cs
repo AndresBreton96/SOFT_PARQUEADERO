@@ -1,4 +1,7 @@
-﻿using Presentacion.WPF.ViewModels;
+﻿using MaterialDesignThemes.Wpf;
+using Presentacion.WPF.Dialogs.ViewModels;
+using Presentacion.WPF.Dialogs.Views;
+using Presentacion.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -64,7 +67,7 @@ namespace Presentacion.WPF.Views
                         PasswordConfirmationTxtBox.IsEnabled = true;
                         FirstNameTxtBox.Focus();
 
-                        AddBtn.Visibility = Visibility.Hidden;
+                        SelectionPnl.Visibility = Visibility.Hidden;
                         ChangesPnl.Visibility = Visibility.Visible;
 
                         ((UsersViewModel)DataContext).SearchMenusResultSymbol = ((UsersViewModel)DataContext)._usersAdministrator.LoadMenus();
@@ -77,7 +80,7 @@ namespace Presentacion.WPF.Views
                         PasswordTxtBox.IsEnabled = false;
                         PasswordConfirmationTxtBox.IsEnabled = false;
 
-                        AddBtn.Visibility = Visibility.Visible;
+                        SelectionPnl.Visibility = Visibility.Visible;
                         ChangesPnl.Visibility = Visibility.Hidden;
 
                         ((UsersViewModel)DataContext).SearchMenusResultSymbol = new List<UsersMenu>();
@@ -94,6 +97,27 @@ namespace Presentacion.WPF.Views
             StartUser();
         }
 
+        private void ModifyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenSearchUser();
+        }
+
+        private void ChangePasswordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTxtBox.IsEnabled)
+            {
+                PasswordTxtBox.Password = "";
+                PasswordConfirmationTxtBox.Password = "";
+                PasswordTxtBox.IsEnabled = false;
+                PasswordConfirmationTxtBox.IsEnabled = false;
+            }
+            else
+            {
+                PasswordTxtBox.IsEnabled = true;
+                PasswordConfirmationTxtBox.IsEnabled = true;
+            }
+        }
+
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             SaveUser();
@@ -102,6 +126,11 @@ namespace Presentacion.WPF.Views
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             CancelChanges();
+        }
+
+        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+
         }
 
         #endregion
@@ -120,6 +149,44 @@ namespace Presentacion.WPF.Views
             }
         }
 
+        private async void OpenSearchUser()
+        {
+            try
+            {
+                var view = new UserSearchDialog
+                {
+                    DataContext = new UserSearchDialogViewModel(((UsersViewModel)DataContext)._usersAdministrator)
+                };
+
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+
+                if (result is null) return;
+
+                var user = ((UserSearchDialogViewModel)view.DataContext).SelectedUser;
+
+                user.Menus = ((UsersViewModel)DataContext)._usersAdministrator.GetFullUser(user.UserId).Menus;
+
+                ((UsersViewModel)DataContext).User = user;
+
+                UserId.Text = user.UserId.ToString();
+                FirstNameTxtBox.Text = user.FirstName;
+                LastNameTxtBox.Text = user.LastName;
+                UserNameTxtBox.Text = user.UserName;
+
+                CurrentProcess = ProcessEnum.Modifying;
+
+                ((UsersViewModel)DataContext).SearchMenusResultSymbol = user.Menus;
+
+                PasswordTxtBox.IsEnabled = false;
+                PasswordConfirmationTxtBox.IsEnabled = false;
+                ChangePasswordBtn.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ha ocurrido un inconveniente.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void SaveUser()
         {
             try
@@ -129,9 +196,10 @@ namespace Presentacion.WPF.Views
                 switch (CurrentProcess)
                 {
                     case ProcessEnum.Adding:
+                    case ProcessEnum.Modifying:
                         var user = new SystemUsers()
                         {
-                            UserId = 0,
+                            UserId = Convert.ToInt32(UserId.Text),
                             FirstName = FirstNameTxtBox.Text,
                             LastName = LastNameTxtBox.Text,
                             UserName = UserNameTxtBox.Text,
@@ -142,18 +210,6 @@ namespace Presentacion.WPF.Views
 
                         if (AddUserCommand != null)
                             AddUserCommand.Execute(user);
-                        break;
-                    case ProcessEnum.Modifying:
-                        var userToModify = new SystemUsers()
-                        {
-                            UserId = ((UsersViewModel)DataContext).User.UserId,
-                            FirstName = FirstNameTxtBox.Text,
-                            LastName = LastNameTxtBox.Text,
-                            UserName = UserNameTxtBox.Text,
-                            Password = PasswordTxtBox.Password,
-                            DateJoined = ((UsersViewModel)DataContext).User.DateJoined,
-                            Menus = ((UsersViewModel)DataContext).SearchMenusResultSymbol
-                        };
                         break;
                 }
 
@@ -192,14 +248,14 @@ namespace Presentacion.WPF.Views
                     return false;
                 }
 
-                if (string.IsNullOrEmpty(PasswordTxtBox.Password))
+                if (string.IsNullOrEmpty(PasswordTxtBox.Password) && CurrentProcess == ProcessEnum.Adding)
                 {
                     MessageBox.Show("Por favor ingrese una contraseña.");
                     PasswordTxtBox.Focus();
                     return false;
                 }
 
-                if (string.IsNullOrEmpty(PasswordConfirmationTxtBox.Password))
+                if (string.IsNullOrEmpty(PasswordConfirmationTxtBox.Password) && CurrentProcess == ProcessEnum.Adding)
                 {
                     MessageBox.Show("Por favor ingrese una confirmación de contraseña.");
                     PasswordConfirmationTxtBox.Focus();
@@ -221,7 +277,7 @@ namespace Presentacion.WPF.Views
                 }
 
                 var errorMessage = "";
-                if (!ValidationMethods.ValidatePassword(PasswordConfirmationTxtBox.Password, out errorMessage))
+                if (!string.IsNullOrEmpty(PasswordConfirmationTxtBox.Password) && !ValidationMethods.ValidatePassword(PasswordTxtBox.Password, out errorMessage))
                 {
                     MessageBox.Show(errorMessage);
                     PasswordTxtBox.Focus();
@@ -247,6 +303,7 @@ namespace Presentacion.WPF.Views
                 UserNameTxtBox.Text = "";
                 PasswordTxtBox.Password = "";
                 PasswordConfirmationTxtBox.Password = "";
+                ChangePasswordBtn.Visibility = Visibility.Hidden;
                 CurrentProcess = ProcessEnum.Nothing;
             }
             catch (Exception ex)
