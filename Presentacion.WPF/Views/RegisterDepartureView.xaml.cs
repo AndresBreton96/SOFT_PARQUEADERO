@@ -2,11 +2,13 @@
 using Presentacion.WPF.Dialogs.Views;
 using Presentacion.WPF.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Transversales.Modelos.Exceptions;
 using Transversales.Modelos.RegistrationEntries;
+using Transversales.Utilitarios.Printing;
 
 namespace Presentacion.WPF.Views
 {
@@ -83,6 +85,7 @@ namespace Presentacion.WPF.Views
         {
             try
             {
+
                 if (CalculatePriceCommand != null)
                 {
                     CalculatePriceCommand.Execute(PlatesTextBox.Text);

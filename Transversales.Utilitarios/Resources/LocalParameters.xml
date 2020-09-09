@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <LocalParameters>
-  <MaximumConsecutive>1</MaximumConsecutive>
+	<MaximumConsecutive>1</MaximumConsecutive>
+	<PrinterName>POS-80</PrinterName>
 </LocalParameters>

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Transversales.Modelos;
 using Transversales.Modelos.Exceptions;
 using Transversales.Modelos.VehiclesRegistration;
+using Transversales.Utilitarios.Printing;
 
 namespace Presentacion.WPF.Commands.VehiclesRegistration
 {

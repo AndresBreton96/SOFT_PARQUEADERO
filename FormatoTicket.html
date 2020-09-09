@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Ticket</title>
+
+    <style>
+        body{          
+            margin-top: 450px;  
+            transform: rotate(90deg);
+        }
+
+        .bordes{
+            border: solid 1px #000000;
+            border-radius: 10px;
+            padding: 0px;
+            margin: 0.5px 0px;
+            overflow: hidden;
+        }
+        .bordes table{
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .encabezadoTabla{
+            text-align: center;
+            background-color: #c2c2c2;
+            border-bottom: solid 1px #000000;
+            font-size: 8px;
+        }
+
+        .bordeDerecho{
+            border-right:  solid 1px #000000;
+        }
+
+        .contenidoTabla{
+            text-align: center;
+            font-size: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div style='text-align: center;'> <!--LOGO-->
+        <table style='width: 100%; border-collapse: collapse;'>
+            <tr>
+                <td width='50%'>
+                    <img src='DAYAs.jpg' alt='' width='100%'></td>
+                <td style='font-size: 12px;'>
+                    Luz Yaneth Marin Franco<br>
+                    Nit. 63.342.807 - 7<br>
+                    NO responsable de Iva<br>
+                    Carrera 6 No. 10-14<br>
+                    Piedecuesta - Stder<br>
+                    <b>Tel: 654 2389</b></td>
+            </tr>
+            <tr>
+                <td colspan='2' style='text-align: left; font-size: 15px;'>Ticket No.: <b>11440</b></td>
+            </tr> <!--INFORMACION-->
+        </table>
+    </div>
+    <div class='bordes'>
+        <table style='max-height: 35px;'>
+            <thead class='encabezadoTabla'>
+                <td style='width: 33%;' class='bordeDerecho'>Hora Entrada</td>
+                <td style='width: 33%;' class='bordeDerecho'>Hora Salida</td>
+                <td style='width: 33%;' >Fecha</td>
+            </thead>
+            <tr>
+                <td class='bordeDerecho contenidoTabla'>10:15</td>
+                <td class='bordeDerecho contenidoTabla'>11:30</td>
+                <td class='contenidoTabla'>04/09/2020</td>
+            </tr>
+        </table>
+    </div>
+    <div class='bordes'>
+        <table style='max-height: 35px;'>
+            <thead class='encabezadoTabla'>
+                <td style='width: 50%;' class='bordeDerecho'>Placas del Vehículo</td>
+                <td style='width: 50%;' >Valor Total</td>
+            </thead>
+            <tr>
+                <td class='bordeDerecho contenidoTabla' style='font-size: 20px;'>DEV992</td>
+                <td class='contenidoTabla' style='font-size: 20px;'>$3.000</td>
+            </tr>
+        </table>
+    </div>
+    <div class='bordes' style='background-color: #c2c2c2; padding: 0px; margin: 0px; line-height: 2px; max-height: 20px;'>
+        <p style='font-size: 6px; text-align: center;'><b>GRACIAS POR VISITARNOS</b></p>
+        <p style='font-size: 5px; text-align: center;'>VER CONDICIONES DE ESTE COPNTRATO AL RESPALDO</p>
+    </div>
+    
+</body>
+</html>

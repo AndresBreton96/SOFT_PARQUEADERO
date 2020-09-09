@@ -2,6 +2,7 @@
 {
     public enum LocalParameterEnum
     {
-        MaximumConsecutive
+        MaximumConsecutive,
+        PrinterName
     }
 }

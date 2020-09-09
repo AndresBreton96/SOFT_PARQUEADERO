@@ -18,4 +18,19 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
+    <PackageReference Include="Select.HtmlToPdf.NetCore" Version="20.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Transversales.Modelos\Transversales.Modelos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\DAYAs.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -35,5 +35,17 @@ namespace Transversales.Utilitarios.Tools
                 return null;
             return node.InnerText;
         }
+
+        //public static string SetProperty(string propertyType, string property, string value)
+        //{
+        //    ReadXml(propertyType);
+        //    XmlNode node = _xmlDocument.DocumentElement.SelectSingleNode($"/{propertyType}/{property}");
+        //    if (node == null)
+        //        return null;
+
+        //    node.InnerText = value;
+
+        //    _xmlDocument.Node
+        //}
     }
 }

@@ -7,6 +7,7 @@ using System.Resources;
 using System.Transactions;
 using Transversales.Modelos.VehiclesRegistration;
 using Transversales.Utilitarios.Enums;
+using Transversales.Utilitarios.Printing;
 using Transversales.Utilitarios.Tools;
 
 namespace Negocio.General.VehiclesRegistration
@@ -56,12 +57,16 @@ namespace Negocio.General.VehiclesRegistration
                 if (consecutive >= maxConsecutive)
                     consecutive = 0;
 
+                bill.BillId = lastId + 1;
+                bill.Consecutive = consecutive + 1;
+                bill.BillDate = DateTime.Now;
+
                 using (var scope = new TransactionScope())
                 {
                     _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[Bills]
                                                  VALUES
-                                                    ({lastId + 1}
-                                                    ,{consecutive + 1}
+                                                    ({bill.BillId}
+                                                    ,{bill.Consecutive}
                                                     ,'{bill.LicensePlate}'
                                                     ,{bill.ParkingCharged}
                                                     ,{bill.ParkingTime}
@@ -70,8 +75,9 @@ namespace Negocio.General.VehiclesRegistration
                                                     ,{bill.Rate}
                                                     ,'{bill.EntryDate:yyyy-MM-dd HH:mm:ss}'
                                                     ,'{bill.DepartureDate:yyyy-MM-dd HH:mm:ss}'
-                                                    ,GETDATE())");
+                                                    ,'{bill.BillDate:yyyy-MM-dd HH:mm:ss}')");
 
+                    PrintService.GenerateDepartureTicket(bill);
                     scope.Complete();
                 }
 

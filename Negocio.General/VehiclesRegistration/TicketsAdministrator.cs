@@ -6,6 +6,7 @@ using System.Linq;
 using System.Transactions;
 using Transversales.Modelos.Exceptions;
 using Transversales.Modelos.RegistrationEntries;
+using Transversales.Utilitarios.Printing;
 
 namespace Negocio.General.VehiclesRegistration
 {
@@ -118,6 +119,9 @@ namespace Negocio.General.VehiclesRegistration
                                                     ,'{ticket.EntryDate:yyyy-MM-dd HH:mm:ss}'
                                                     ,{(byte)ticket.EntryType}
                                                     ,{ticket.EntryTicketId})");
+
+                    if (ticket.EntryType == EntryType.Entrada)
+                        PrintService.GenerateEntryTicket(ticket);
 
                     scope.Complete();
                 }

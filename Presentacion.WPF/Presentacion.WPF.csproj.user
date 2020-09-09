@@ -5,6 +5,9 @@
     <Compile Update="Controls\SampleMessageDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Dialogs\Views\ChangePrinterDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Dialogs\Views\ChargedPriceDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -35,6 +38,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\SampleMessageDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Views\ChangePrinterDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Dialogs\Views\ChargedPriceDialog.xaml">
