@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<EnumNames>
+<RateType>
 	<CarHour>Hora Carro</CarHour>
 	<CarFraction>Fracción Carro</CarFraction>
 	<BikeHour>Hora Moto</BikeHour>
 	<BikeFraction>Fracción Moto</BikeFraction>
-</EnumNames>
+</RateType>

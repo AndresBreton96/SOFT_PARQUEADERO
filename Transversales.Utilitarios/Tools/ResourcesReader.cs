@@ -36,6 +36,16 @@ namespace Transversales.Utilitarios.Tools
             return node.InnerText;
         }
 
+        public static string GetEnumProperty(string resourceName, string propertyType, string property)
+        {
+            ReadXml(resourceName);
+            var culture = System.Globalization.CultureInfo.CurrentCulture.Name;
+            XmlNode node = _xmlDocument.DocumentElement.SelectSingleNode($"/{propertyType}/{property}");
+            if (node == null)
+                return null;
+            return node.InnerText;
+        }
+
         //public static string SetProperty(string propertyType, string property, string value)
         //{
         //    ReadXml(propertyType);

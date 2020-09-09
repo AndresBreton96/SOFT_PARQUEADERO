@@ -1,4 +1,10 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using Presentacion.WPF.Dialogs;
+using Presentacion.WPF.Dialogs.ViewModels;
+using Presentacion.WPF.Dialogs.Views;
+using Presentacion.WPF.ViewModels;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -37,7 +43,7 @@ namespace Presentacion.WPF.Views
             switch (e.Key)
             {
                 case Key.Enter:
-                    RegisterVehicleEntry();
+                    RegisterVehicleEntryAsync();
                     break;
                 default:
                     break;
@@ -47,7 +53,7 @@ namespace Presentacion.WPF.Views
         #endregion
 
         #region Methods
-        private void RegisterVehicleEntry()
+        private async Task RegisterVehicleEntryAsync()
         {
             var plates = PlatesTextBox.Text;
             if(plates.Length < 6)
@@ -57,12 +63,26 @@ namespace Presentacion.WPF.Views
                 return;
             }
 
+            var view = new VehicleTypeDialog
+            {
+                DataContext = new VehicleTypeDialogViewModel()
+            };
+
+            var result = await DialogHost.Show(view, "RootDialog", ((RegisterEntryViewModel)DataContext).ClosingEventHandler);
+            var vehicleType = VehicleType.Car;
+
+            if (!(bool)result)
+            {
+                vehicleType = VehicleType.Bike;
+            }
+
             var ticket = new Tickets()
             {
                 EntryDate = DateTime.Now,
                 EntryTicketId = 0,
                 LicensePlate = plates,
                 EntryType = EntryType.Entrada,
+                VehicleType = vehicleType,
                 TicketId = 0
             };
 

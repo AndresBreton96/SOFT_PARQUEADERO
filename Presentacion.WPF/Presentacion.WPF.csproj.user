@@ -17,6 +17,9 @@
     <Compile Update="Dialogs\Views\UserSearchDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Dialogs\Views\VehicleTypeDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ModifyPricesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +53,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Dialogs\Views\UserSearchDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dialogs\Views\VehicleTypeDialog.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ModifyPricesView.xaml">
