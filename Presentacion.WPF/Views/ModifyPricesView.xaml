@@ -65,6 +65,7 @@
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             IsEnabled="False"
                             LostFocus="RateTypesCbo_LostFocus">
+
                         </ComboBox>
                         <TextBox
                             x:Name="RateValue"

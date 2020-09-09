@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using Transversales.Modelos;
 using Transversales.Modelos.Exceptions;
+using Transversales.Modelos.RegistrationEntries;
 using Transversales.Modelos.VehiclesRegistration;
 using Transversales.Utilitarios.Printing;
 
@@ -47,6 +48,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
             {
                 if (parameter is string)
                 {
+                    var entryTicket = _ticketsAdministrator.GetEntryTicket((string)parameter, true);
                     var rates = _ratesAdministrator.GetAll();
 
                     if (!rates.Any())
@@ -54,20 +56,19 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
                         MessageBox.Show("No se han configurado tarifas para el cobro, por favor ingrese ambas tarifas e intente nuevamente.");
                         return;
                     }
-                    var hourlyRate = rates.FirstOrDefault(x => x.RateType == RateType.Hora);
+                    var hourlyRate = rates.FirstOrDefault(x => entryTicket.VehicleType == VehicleType.Car && x.RateType == RateType.HoraCarro || entryTicket.VehicleType == VehicleType.Bike && x.RateType == RateType.HoraMoto);
                     if (hourlyRate == null)
                     {
                         MessageBox.Show("No se ha configurado una tarifa horaria para el cobro, por favor ingrese ambas tarifas e intente nuevamente.");
                         return;
                     }
-                    var fractionaryRate = rates.FirstOrDefault(x => x.RateType == RateType.Fraccion);
+                    var fractionaryRate = rates.FirstOrDefault(x => entryTicket.VehicleType == VehicleType.Car && x.RateType == RateType.FraccionCarro || entryTicket.VehicleType == VehicleType.Bike && x.RateType == RateType.FraccionMoto);
                     if (fractionaryRate == null)
                     {
                         MessageBox.Show("No se ha configurado una tarifa por fracción para el cobro, por favor ingrese ambas tarifas e intente nuevamente.");
                         return;
                     }
 
-                    var entryTicket = _ticketsAdministrator.GetEntryTicket((string)parameter, true);
                     var departureTicket = _ticketsAdministrator.GetDepartureTicket(entryTicket.TicketId);
 
                     var time = _registerDepartureViewModel.Hours * hourlyRate.Time + _registerDepartureViewModel.Fractions * fractionaryRate.Time;

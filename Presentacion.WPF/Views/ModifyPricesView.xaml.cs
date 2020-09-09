@@ -111,7 +111,7 @@ namespace Presentacion.WPF.Views
             if(RateTypesCbo.SelectedIndex == -1)
                 return;
 
-            if((RateType)RateTypesCbo.SelectedItem == RateType.Hora)
+            if((RateType)RateTypesCbo.SelectedItem == RateType.HoraCarro || (RateType)RateTypesCbo.SelectedItem == RateType.HoraMoto)
             {
                 RateTime.Text = "60";
                 RateTime.IsEnabled = false;

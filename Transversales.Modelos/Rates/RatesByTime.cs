@@ -12,7 +12,9 @@
 
     public enum RateType : byte
     {
-        Hora = 1,
-        Fraccion = 2
+        HoraCarro = 1,
+        FraccionCarro = 2,
+        HoraMoto = 3,
+        FraccionMoto = 4
     }
 }

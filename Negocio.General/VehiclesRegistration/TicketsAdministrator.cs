@@ -118,6 +118,7 @@ namespace Negocio.General.VehiclesRegistration
                                                     ,'{ticket.LicensePlate}'
                                                     ,'{ticket.EntryDate:yyyy-MM-dd HH:mm:ss}'
                                                     ,{(byte)ticket.EntryType}
+                                                    ,{(byte)ticket.VehicleType}
                                                     ,{ticket.EntryTicketId})");
 
                     if (ticket.EntryType == EntryType.Entrada)

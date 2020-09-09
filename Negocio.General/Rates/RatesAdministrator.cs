@@ -6,6 +6,7 @@ using System.Linq;
 using System.Transactions;
 using Transversales.Modelos;
 using Transversales.Modelos.Exceptions;
+using Transversales.Utilitarios.Tools;
 
 namespace Negocio.General.Rates
 {
@@ -30,6 +31,7 @@ namespace Negocio.General.Rates
             var rates = _repositorio.ExecuteQuery("SELECT * FROM RatesByTime");
             foreach(var rate in rates)
             {
+
                 rate.Name = Enum.GetName(typeof(RateType), rate.RateType);
             }
 

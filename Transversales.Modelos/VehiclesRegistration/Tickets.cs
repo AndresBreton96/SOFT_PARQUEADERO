@@ -8,6 +8,7 @@ namespace Transversales.Modelos.RegistrationEntries
         public string LicensePlate { get; set; }
         public DateTime EntryDate { get; set; }
         public EntryType EntryType { get; set; }
+        public VehicleType VehicleType { get; set; }
         public int EntryTicketId { get; set; }
         public string EntryTypeName { get; set; }
     }
@@ -17,5 +18,11 @@ namespace Transversales.Modelos.RegistrationEntries
         Vacio = 0,
         Entrada = 1,
         Salida = 2
+    }
+
+    public enum VehicleType : byte
+    {
+        Car = 1,
+        Bike = 2
     }
 }
