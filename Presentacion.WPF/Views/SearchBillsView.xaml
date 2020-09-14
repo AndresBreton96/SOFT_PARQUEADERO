@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer>
-        <materialDesign:Card Width="600" Height="1000">
+        <materialDesign:Card Width="800" Height="800">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -24,11 +24,11 @@
                     </Grid.ColumnDefinitions>
                     <materialDesign:PackIcon Kind="Search" Width="100" Height="100" />
                     <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Consultar Facturas</TextBlock>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap" FontWeight="Bold">CONSULTAR FACTURAS</TextBlock>
                     </StackPanel>
                 </Grid>
 
-                <materialDesign:Card Grid.Row="2" Width="420" Height="100">
+                <materialDesign:Card Grid.Row="2" Width="500" Height="150"  Margin="0,0,0,10">
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -71,16 +71,54 @@
                     </Grid>
                 </materialDesign:Card>
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 15 0 0" Grid.Row="3" HorizontalAlignment="Center">Registro Facturas</TextBlock>
+                <TextBlock 
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Margin="0 15 0 0" 
+                    Grid.Row="3" 
+                    HorizontalAlignment="Center">Registro Facturas</TextBlock>
 
-                <ListView ItemsSource="{Binding SearchBillsResultSymbol}" Grid.Row="4" HorizontalAlignment="Center" x:Name="BillsListView">
+                <ListView 
+                    ItemsSource="{Binding SearchBillsResultSymbol}" 
+                    Grid.Row="4" 
+                    HorizontalAlignment="Center" 
+                    x:Name="BillsListView"
+                    Height="400" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding BillId}" Header="Id" />
-                            <GridViewColumn DisplayMemberBinding="{Binding LicensePlate}" Header="Placas" />
+                            <GridViewColumn Header="Id">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding BillId}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Placas">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding LicensePlate}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn DisplayMemberBinding="{Binding BillDate}" Header="Fecha Factura" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Rate}" Header="Valor" />
-                            <GridViewColumn DisplayMemberBinding="{Binding ParkingTime}" Header="Tiempo Parqueo" />
+                            <GridViewColumn Header="Valor">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Rate, StringFormat=$ {0:#,#}}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Tiempo Parqueo">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ParkingTime, StringFormat= # (Minutos)}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn DisplayMemberBinding="{Binding EntryDate}" Header="Fecha Entrada" />
                             <GridViewColumn DisplayMemberBinding="{Binding DepartureDate}" Header="Fecha Salida" />
                         </GridView>

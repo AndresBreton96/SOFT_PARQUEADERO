@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Transversales.Modelos.Exceptions;
 using Transversales.Modelos.RegistrationEntries;
 using Transversales.Utilitarios.Printing;
@@ -21,6 +22,8 @@ namespace Presentacion.WPF.Views
         public RegisterDepartureView()
         {
             InitializeComponent();
+
+            TxtBackground.ImageSource = new BitmapImage(new Uri($"{AppDomain.CurrentDomain.BaseDirectory}\\Resources\\Ppar.jpg"));
         }
 
         #endregion

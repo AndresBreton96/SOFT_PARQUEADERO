@@ -30,7 +30,7 @@ namespace Negocio.General.VehiclesRegistration
         {
             var tickets = _repositorio.ExecuteQuery($@"SELECT * 
                                                        FROM Tickets 
-                                                       WHERE CAST(EntryDate AS date) >= '{initialDate:yyyy/MM/dd}' AND CAST(EntryDate AS date) < '{finalDate:yyyy/MM/dd}' AND
+                                                       WHERE CAST(EntryDate AS date) >= '{initialDate:yyyy/MM/dd}' AND CAST(EntryDate AS date) <= '{finalDate:yyyy/MM/dd}' AND
                                                              (0 = {(byte)entryType} OR EntryType = {(byte)entryType}) AND LicensePlate LIKE '%{licensePlate.Replace(' ', '%')}%'");
             if (tickets.Any())
             {

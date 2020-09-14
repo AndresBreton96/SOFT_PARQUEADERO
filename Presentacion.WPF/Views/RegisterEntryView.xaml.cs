@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Transversales.Modelos.RegistrationEntries;
 
 namespace Presentacion.WPF.Views
@@ -21,6 +22,8 @@ namespace Presentacion.WPF.Views
         public RegisterEntryView()
         {
             InitializeComponent();
+
+            TxtBackground.ImageSource = new BitmapImage(new Uri($"{AppDomain.CurrentDomain.BaseDirectory}\\Resources\\Ppar.jpg"));
         }
 
         #endregion

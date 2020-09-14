@@ -8,14 +8,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer>
-        <materialDesign:Card Width="600" Height="1000">
+        <materialDesign:Card Width="800" Height="800">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="400" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
                     <Grid.ColumnDefinitions>
@@ -24,13 +24,13 @@
                     </Grid.ColumnDefinitions>
                     <materialDesign:PackIcon Kind="CurrencyUsd" Width="100" Height="100" />
                     <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Modificar Tarifas</TextBlock>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap" FontWeight="Bold">MODIFICAR TARIFAS</TextBlock>
                     </StackPanel>
                 </Grid>
 
                 <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Grid.Row="1" HorizontalAlignment="Center">Agregar/Modificar Tarifa</TextBlock>
 
-                <materialDesign:Card Grid.Row="2" Width="420" Height="270">
+                <materialDesign:Card Grid.Row="2" Width="420" Height="270" Margin="0,10,0,0">
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -115,22 +115,59 @@
                     </Grid>
                 </materialDesign:Card>
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 15 0 0" Grid.Row="3" HorizontalAlignment="Center">Tarifas Actuales</TextBlock>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0,48,0,367" Grid.Row="3" HorizontalAlignment="Center" Grid.RowSpan="2">Tarifas Actuales</TextBlock>
 
-                <ListView ItemsSource="{Binding SearchRatesResultSymbol}" Grid.Row="4" HorizontalAlignment="Center" x:Name="RatesListView">
+                <ListView ItemsSource="{Binding SearchRatesResultSymbol}" Grid.Row="4" HorizontalAlignment="Center" x:Name="RatesListView" Margin="0,20,0,-20">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding RateId}" Header="Id" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Descripcion" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="TipoTarifa" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Valor" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Time}" Header="Tiempo (minutos)" />
+                            <GridViewColumn Header="Id">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RateId}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Descripcion">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Description}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="TipoTarifa">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Valor">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Value, StringFormat=$ {0:#,#}}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Tiempo (minutos)">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Time}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Modificar">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button
                                             x:Name="ModifyRateButton"
-                                            Click="ModifyRateButton_Click">
+                                            Click="ModifyRateButton_Click"
+                                            Width="50">
+                                            <materialDesign:PackIcon Kind="Edit" />
                                         </Button>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -140,8 +177,10 @@
                                     <DataTemplate>
                                         <Button
                                             x:Name="DeleteRateButton"
-                                            Click="DeleteRateButton_Click">
-
+                                            Click="DeleteRateButton_Click"
+                                            Width="50"
+                                            Background="DarkRed">
+                                            <materialDesign:PackIcon Kind="Delete" />
                                         </Button>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

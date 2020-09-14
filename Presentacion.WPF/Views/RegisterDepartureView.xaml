@@ -7,31 +7,44 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <materialDesign:PackIcon Kind="PresenceExit" Width="100" Height="100" />
-            <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
-                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Registrar Salida de Vehículo</TextBlock>
-            </StackPanel>
-        </Grid>
+    <ScrollViewer>
+        <materialDesign:Card Width="800" Height="800">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="PresenceExit" Width="100" Height="100" />
+                    <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap" FontWeight="Bold">REGISTRAR SALIDA</TextBlock>
+                    </StackPanel>
+                </Grid>
 
-        <materialDesign:Card Grid.Row="1" Width="500" Height="500">
-            <TextBox
+                <TextBox
+                    Grid.Row="1"
                     x:Name="PlatesTextBox"
-                    materialDesign:HintAssist.Hint="Placas"
+                    materialDesign:HintAssist.Hint=""
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    VerticalAlignment="Center"
                     KeyDown="PlatesTextBox_KeyDown"
-                    CharacterCasing="Upper"/>
-
+                    CharacterCasing="Upper"
+                    Width="500" 
+                    Height="249"
+                    FontSize="120"
+                    TextAlignment="Center"
+                    Padding="0,15,0,0">
+                    <TextBox.Background>
+                        <ImageBrush 
+                            x:Name="TxtBackground"
+                            AlignmentX="Right" 
+                            Stretch="Fill"/>
+                    </TextBox.Background>
+                </TextBox>
+            </Grid>
         </materialDesign:Card>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

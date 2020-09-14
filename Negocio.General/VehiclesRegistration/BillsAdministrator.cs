@@ -37,7 +37,7 @@ namespace Negocio.General.VehiclesRegistration
         {
             var query = $@"SELECT * 
                            FROM Bills 
-                           WHERE CAST(BillDate AS date) >= '{initialDate:yyyy/MM/dd}' AND CAST(BillDate AS date) < '{finalDate:yyyy/MM/dd}'
+                           WHERE CAST(BillDate AS date) >= '{initialDate:yyyy/MM/dd}' AND CAST(BillDate AS date) <= '{finalDate:yyyy/MM/dd}'
                                  AND LicensePlate LIKE '%{licensePlate.Replace(' ', '%')}%'";
 
             var bills = _repositorio.ExecuteQuery(query);

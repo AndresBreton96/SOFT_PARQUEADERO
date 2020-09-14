@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer>
-        <materialDesign:Card Width="600" Height="1000">
+        <materialDesign:Card Width="800" Height="800">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -24,13 +24,13 @@
                     </Grid.ColumnDefinitions>
                     <materialDesign:PackIcon Kind="User" Width="100" Height="100" />
                     <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" TextWrapping="Wrap">Modificar Usuarios</TextBlock>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap" FontWeight="Bold">MODIFICAR USUARIOS</TextBlock>
                     </StackPanel>
                 </Grid>
 
                 <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Grid.Row="1" HorizontalAlignment="Center">Agregar/Modificar Usuarios</TextBlock>
 
-                <materialDesign:Card Grid.Row="2" Width="420" Height="270">
+                <materialDesign:Card Grid.Row="2" Width="420" Height="270" Margin="0,10,0,0">
                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -139,19 +139,31 @@
                     </Grid>
                 </materialDesign:Card>
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0 15 0 0" Grid.Row="3" HorizontalAlignment="Center">Permisos</TextBlock>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="0,15,0,0" Grid.Row="3" HorizontalAlignment="Center">Permisos</TextBlock>
 
                 <ListView ItemsSource="{Binding SearchMenusResultSymbol}" Grid.Row="4" HorizontalAlignment="Center" x:Name="RatesListView">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding MenuId}" Header="Id" />
+                            <GridViewColumn Header="Id">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding MenuId}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn DisplayMemberBinding="{Binding MenuName}" Header="Descripcion" />
                             <GridViewColumn Header="Permiso">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox
                                             Style="{StaticResource MaterialDesignCheckBox}"
-                                            IsChecked="{Binding Permission}">
+                                            IsChecked="{Binding Permission}"
+                                            HorizontalAlignment="Center">
                                         </CheckBox>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
