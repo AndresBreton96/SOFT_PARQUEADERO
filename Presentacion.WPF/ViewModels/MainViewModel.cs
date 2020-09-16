@@ -5,9 +5,13 @@ using Presentacion.WPF.State.Authenticators;
 using Presentacion.WPF.State.Navigators;
 using Presentacion.WPF.ViewModels.Factories;
 using Presentacion.WPF.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using Transversales.Modelos;
 using Transversales.Utilitarios.Tools;
@@ -113,6 +117,17 @@ namespace Presentacion.WPF.ViewModels
         private void Navigator_StateChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));
+
+            var type = CurrentViewModel.GetType();
+            var name = type.Name.Substring(0, type.Name.LastIndexOf("Model"));
+
+            if (name == "LoginView") return;
+
+            var selectedItemName = SelectedItem.Content.GetType().Name;
+
+            if (name.Equals(selectedItemName)) return;
+
+            SelectedItem = MenuItems.Where(x => x.Content.GetType().Name.Equals(name)).FirstOrDefault();
         }
 
         #endregion
@@ -122,7 +137,7 @@ namespace Presentacion.WPF.ViewModels
         {
             var menusReturn = new ObservableCollection<MenuItem>
             {
-                new MenuItem(ResourcesReader.GetPropertyWithLanguage("MenuNames", "Home"), new HomeView { DataContext = new HomeViewModel(_accountStore) }, ViewType.Home)
+                new MenuItem(ResourcesReader.GetPropertyWithLanguage("MenuNames", "Home"), new HomeView { DataContext = new HomeViewModel(_navigator, _viewModelFactory, _accountStore) }, ViewType.Home)
             };
 
             foreach (var menu in menus)

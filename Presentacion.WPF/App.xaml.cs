@@ -84,6 +84,8 @@ namespace Presentacion.WPF
             services.AddSingleton<CreateViewModel<HomeViewModel>>(services =>
             {
                 return () => new HomeViewModel(
+                    services.GetRequiredService<INavigator>(),
+                    services.GetRequiredService<IViewModelFactory>(),
                     services.GetRequiredService<IAccountStore>());
             });
 

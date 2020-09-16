@@ -62,7 +62,8 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-                <views:HomeView/>
+                <views:HomeView
+                    UpdateCurrentViewModelCommand="{Binding UpdateCurrentViewModelCommand}"/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
