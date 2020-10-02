@@ -18,10 +18,7 @@ namespace Transversales.Utilitarios.Printing
             var styles = @"
     <style>
         body{          
-            margin-top: 600px;  
-            margin-left: -250px;
-            width: 2000px;
-            transform: rotate(90deg);
+            width: 1000px;
         }
 
         .bordes{
@@ -43,7 +40,7 @@ namespace Transversales.Utilitarios.Printing
             text-align: center;
             background-color: #c2c2c2;
             border-bottom: solid 3px #000000;
-            font-size: 60px;
+            font-size: 30px;
         }
 
         .bordeDerecho{
@@ -52,7 +49,7 @@ namespace Transversales.Utilitarios.Printing
 
         .contenidoTabla{
             text-align: center;
-            font-size: 100px;
+            font-size: 50px;
         }
 
     </style>";
@@ -71,9 +68,9 @@ namespace Transversales.Utilitarios.Printing
     <div style='text-align: center;'> <!--LOGO-->
         <table style='width: 100%; border-collapse: collapse;'>
             <tr>
-                <td width='50%'>
+                <td width='40%'>
                     <img src='{AppDomain.CurrentDomain.BaseDirectory}DAYAs.jpg' alt='' width='100%'></td>
-                <td style='font-size: 50px;'>
+                <td style='font-size: 40px;'>
                     Luz Yaneth Marin Franco<br>
                     Nit. 63.342.807 - 7<br>
                     NO responsable de Iva<br>
@@ -82,39 +79,38 @@ namespace Transversales.Utilitarios.Printing
                     <b>Tel: 654 2389</b></td>
             </tr>
             <tr>
-                <td colspan='2' style='text-align: left; font-size: 60px;'>Ticket No.: <b>{bill.Consecutive}</b></td>
+                <td colspan='2' style='text-align: left; font-size: 50px;'>Ticket No.: <b>{bill.Consecutive}</b></td>
             </tr> <!--INFORMACION-->
         </table>
     </div>
     <div class='bordes'>
-        <table style='height: 140px;'>
+        <table style='height: 125px;'>
             <thead class='encabezadoTabla'>
-                <td style='width: 33%;' class='bordeDerecho'>Hora Entrada</td>
-                <td style='width: 33%;' class='bordeDerecho'>Hora Salida</td>
+                <td style='width: 33%;' class='bordeDerecho'>Fecha Entrada</td>
+                <td style='width: 33%;' class='bordeDerecho'>Fecha Salida</td>
                 <td style='width: 33%;' >Fecha</td>
             </thead>
             <tr>
-                <td class='bordeDerecho contenidoTabla'>{bill.EntryDate.ToShortTimeString()}</td>
-                <td class='bordeDerecho contenidoTabla'>{bill.DepartureDate.ToShortTimeString()}</td>
+                <td class='bordeDerecho contenidoTabla'>{bill.EntryDate.ToLongDateString()}</td>
+                <td class='bordeDerecho contenidoTabla'>{bill.DepartureDate.ToLongDateString()}</td>
                 <td class='contenidoTabla'>{bill.BillDate.ToShortDateString()}</td>
             </tr>
         </table>
     </div>
     <div class='bordes'>
-        <table style='height: 140px;'>
+        <table style='height: 200px;'>
             <thead class='encabezadoTabla'>
                 <td style='width: 50%;' class='bordeDerecho'>Placas del Vehículo</td>
                 <td style='width: 50%;' >Valor Total</td>
             </thead>
             <tr>
-                <td class='bordeDerecho contenidoTabla' style='font-size: 120px;'>{bill.LicensePlate}</td>
-                <td class='contenidoTabla' style='font-size: 120px;'>${bill.Rate:#,###,##0}</td>
+                <td class='bordeDerecho contenidoTabla' style='font-size: 60px;'>{bill.LicensePlate}</td>
+                <td class='contenidoTabla' style='font-size: 60px;'>${bill.Rate:#,###,##0}</td>
             </tr>
         </table>
     </div>
-    <div class='bordes' style='background-color: #c2c2c2; padding: 0px; margin: 60px 0px; line-height: 2px; height: 150px;'>
-        <p style='font-size: 50px; text-align: center;'><b>GRACIAS POR VISITARNOS</b></p>
-        <p style='font-size: 48px; text-align: center;'>VER CONDICIONES DE ESTE CONTRATO AL RESPALDO</p>
+    <div class='bordes' style='background-color: #c2c2c2; padding: 0px; margin: 60px 0px; line-height: 2px; height: 100px;'>
+        <p style='font-size: 40px; text-align: center;'><b>GRACIAS POR VISITARNOS</b></p>
     </div>
     
 </body>
@@ -136,10 +132,7 @@ namespace Transversales.Utilitarios.Printing
             var styles = @"
     <style>
         body{          
-            margin-top: 600px;  
-            margin-left: -250px;
-            width: 2000px;
-            transform: rotate(90deg);
+            width: 1000px;
         }
 
         .bordes{
@@ -161,7 +154,7 @@ namespace Transversales.Utilitarios.Printing
             text-align: center;
             background-color: #c2c2c2;
             border-bottom: solid 3px #000000;
-            font-size: 60px;
+            font-size: 30px;
         }
 
         .bordeDerecho{
@@ -170,16 +163,16 @@ namespace Transversales.Utilitarios.Printing
 
         .contenidoTabla{
             text-align: center;
-            font-size: 100px;
+            font-size: 50px;
         }
 
         .barcode{
             font-family: 'Libre Barcode 39';
             padding: 0px;
             margin: 0px;
-            font-size: 400px;
+            font-size: 150px;
             margin-left: 200px;
-            margin-top: 80px;
+            margin-top: 50px;
         }
 
     </style>";
@@ -198,9 +191,9 @@ namespace Transversales.Utilitarios.Printing
     <div style='text-align: center;'> <!--LOGO-->
         <table style='width: 100%; border-collapse: collapse;'>
             <tr>
-                <td width='50%'>
+                <td width='40%'>
                     <img src='{AppDomain.CurrentDomain.BaseDirectory}DAYAs.jpg' alt='' width='100%'></td>
-                <td style='font-size: 50px;'>
+                <td style='font-size: 40px;'>
                     Luz Yaneth Marin Franco<br>
                     Nit. 63.342.807 - 7<br>
                     NO responsable de Iva<br>
@@ -211,7 +204,7 @@ namespace Transversales.Utilitarios.Printing
         </table>
     </div>
     <div class='bordes'>
-        <table style='height: 140px;'>
+        <table style='height: 125px;'>
             <thead class='encabezadoTabla'>
                 <td style='width: 33%;' class='bordeDerecho'>Hora Entrada</td>
                 <td style='width: 33%;' class='bordeDerecho'>Fecha Entrada</td>
@@ -219,17 +212,16 @@ namespace Transversales.Utilitarios.Printing
             </thead>
             <tr>
                 <td class='bordeDerecho contenidoTabla'>{ticket.EntryDate.ToShortTimeString()}</td>
-                <td class='bordeDerecho contenidoTabla'>{ticket.EntryDate.ToShortTimeString()}</td>
+                <td class='bordeDerecho contenidoTabla'>{ticket.EntryDate.ToShortDateString()}</td>
                 <td class='contenidoTabla'>{ticket.LicensePlate}</td>
             </tr>
         </table>
     </div>
-    <div class='bordes' style='height: 450px;'>
+    <div class='bordes' style='height: 200px;'>
         <p class='barcode'>*{ticket.LicensePlate}*</p>
     </div>
-    <div class='bordes' style='background-color: #c2c2c2; padding: 0px; margin: 60px 0px; line-height: 2px; height: 150px;'>
-        <p style='font-size: 50px; text-align: center;'><b>GRACIAS POR VISITARNOS</b></p>
-        <p style='font-size: 48px; text-align: center;'>VER CONDICIONES DE ESTE CONTRATO AL RESPALDO</p>
+    <div class='bordes' style='background-color: #c2c2c2; padding: 0px; margin: 60px 0px; line-height: 2px; height: 100px;'>
+        <p style='font-size: 40px; text-align: center;'><b>GRACIAS POR VISITARNOS</b></p>
     </div>
     
 </body>

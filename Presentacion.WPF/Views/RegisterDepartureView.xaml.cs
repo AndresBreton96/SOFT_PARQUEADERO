@@ -94,19 +94,19 @@ namespace Presentacion.WPF.Views
                     CalculatePriceCommand.Execute(PlatesTextBox.Text);
                     ((RegisterDepartureViewModel)DataContext).Plates = PlatesTextBox.Text;
 
-                    if ((((RegisterDepartureViewModel)DataContext).Fractions > 1 && ((RegisterDepartureViewModel)DataContext).Hours == 0) || (((RegisterDepartureViewModel)DataContext).Fractions != 0 && ((RegisterDepartureViewModel)DataContext).Hours != 0))                 
-                    {
-                        if (RunDialogCommand != null)
-                        {
-                            RunDialogCommand.Execute(null);
-                            PlatesTextBox.Text = string.Empty;
-                            return;
-                        }
-                        MessageBox.Show("No se ha podido inicializar el comando para mostrar el diálogo.");
-                        ((RegisterDepartureViewModel)DataContext).Plates = null;
-                        PlatesTextBox.Text = string.Empty;
-                        return;
-                    }
+                    //if ((((RegisterDepartureViewModel)DataContext).Fractions > 1 && ((RegisterDepartureViewModel)DataContext).Hours == 0) || (((RegisterDepartureViewModel)DataContext).Fractions != 0 && ((RegisterDepartureViewModel)DataContext).Hours != 0))                 
+                    //{
+                    //    if (RunDialogCommand != null)
+                    //    {
+                    //        RunDialogCommand.Execute(null);
+                    //        PlatesTextBox.Text = string.Empty;
+                    //        return;
+                    //    }
+                    //    MessageBox.Show("No se ha podido inicializar el comando para mostrar el diálogo.");
+                    //    ((RegisterDepartureViewModel)DataContext).Plates = null;
+                    //    PlatesTextBox.Text = string.Empty;
+                    //    return;
+                    //}
 
                     if (SaveDepartureTicketCommand != null)
                     {

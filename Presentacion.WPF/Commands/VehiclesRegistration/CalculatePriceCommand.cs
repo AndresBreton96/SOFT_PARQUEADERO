@@ -72,22 +72,17 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
 
 
                     var timeToCharge = Math.Ceiling((departureTime - entryTicket.EntryDate).TotalMinutes);
-                    if(timeToCharge < fractionaryRate.Time)
+                    if(timeToCharge <= fractionaryRate.Time)
                     {
                         var hours = 0.00;
                         var fractions = 1.00;
                         _registerDepartureViewModel.Hours = hours;
                         _registerDepartureViewModel.Fractions = fractions;
                     }
-                    else if (timeToCharge < hourlyRate.Time)
+                    else if (timeToCharge <= hourlyRate.Time)
                     {
-                        var hours = 0.00;
-                        var fractions = Math.Ceiling(timeToCharge / fractionaryRate.Time);
-                        if (fractions == Math.Ceiling(hourlyRate.Time / fractionaryRate.Time))
-                        {
-                            hours = Math.Ceiling(timeToCharge / hourlyRate.Time);
-                            fractions = 0;
-                        }
+                        var hours = 1.00;
+                        var fractions = 0.00;
                         _registerDepartureViewModel.Hours = hours;
                         _registerDepartureViewModel.Fractions = fractions;
                     }
@@ -95,10 +90,14 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
                     {
                         var hours = Math.Truncate(timeToCharge / hourlyRate.Time);
                         var fractions = Math.Ceiling((timeToCharge - (hours * hourlyRate.Time)) / fractionaryRate.Time);
-                        if (fractions == Math.Ceiling(hourlyRate.Time / fractionaryRate.Time))
+                        if (fractions > 1.00)
                         {
                             hours = Math.Ceiling(timeToCharge / hourlyRate.Time);
                             fractions = 0;
+                        }
+                        else
+                        {
+                            fractions = 1.00;
                         }
                         _registerDepartureViewModel.Hours = hours;
                         _registerDepartureViewModel.Fractions = fractions;

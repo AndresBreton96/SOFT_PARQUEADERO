@@ -9,11 +9,8 @@ namespace Transversales.Utilitarios.Tools
 
         private static void ReadXml(string propertyType)
         {
-            if (_xmlDocument == null)
-            {
-                _xmlDocument = new XmlDocument();
-                _xmlDocument.Load($"{AppDomain.CurrentDomain.BaseDirectory}\\Resources\\{propertyType}.xml");
-            }
+            _xmlDocument = new XmlDocument();
+            _xmlDocument.Load($"{AppDomain.CurrentDomain.BaseDirectory}\\Resources\\{propertyType}.xml");
 
         }
 

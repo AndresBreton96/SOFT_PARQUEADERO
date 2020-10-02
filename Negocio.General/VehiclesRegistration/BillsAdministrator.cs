@@ -51,7 +51,7 @@ namespace Negocio.General.VehiclesRegistration
             try
             {
                 var lastId = _repositorio.GetLastId("BillId");
-                var consecutive = _repositorio.GetConsecutive("BillId");
+                var consecutive = _repositorio.GetConsecutive("Consecutive");
                 var maxConsecutive = _repositorio.ExecuteQueryInt($"SELECT Value FROM LocalParameters WHERE Id = {Convert.ToInt32(ResourcesReader.GetProperty("LocalParameters",LocalParameterEnum.MaximumConsecutive.ToString()))}");
 
                 if (consecutive >= maxConsecutive)

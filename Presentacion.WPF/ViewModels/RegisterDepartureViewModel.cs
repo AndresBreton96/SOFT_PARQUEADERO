@@ -67,6 +67,10 @@ namespace Presentacion.WPF.ViewModels
                     Hours++;
                     Fractions = 0;
                 }
+                else
+                {
+                    Fractions = 1;
+                }
 
                 if (SaveDepartureTicketCommand != null)
                 {

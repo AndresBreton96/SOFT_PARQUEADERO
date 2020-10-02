@@ -17,3 +17,11 @@
 /Negocio.Contratos/bin/Debug/netcoreapp3.1
 /Negocio.General/bin/Debug/netcoreapp3.1
 /Transversales.Utilitarios/bin/Debug/netcoreapp3.1
+/Datos.Contratos/bin/Release/netcoreapp3.1
+/Datos.Dapper/bin/Release/netcoreapp3.1
+/Negocio.Contratos/bin/Release/netcoreapp3.1
+/Negocio.General/bin/Release/netcoreapp3.1
+/Presentacion.WPF/bin/Release/netcoreapp3.1
+/Presentacion.WPF/Properties/PublishProfiles
+/Transversales.Modelos/bin/Release/netcoreapp3.1
+/Transversales.Utilitarios/bin/Release/netcoreapp3.1
