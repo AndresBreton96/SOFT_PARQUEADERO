@@ -42,7 +42,7 @@ namespace Presentacion.WPF.Views
         #region Events
         private void InitialDatePicker_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(FinalDatePicker.SelectedDate > InitialDatePicker.SelectedDate)
+            if (FinalDatePicker.SelectedDate < InitialDatePicker.SelectedDate)
             {
                 MessageBox.Show("La fecha final debe ser mayor a la inicial, intente nuevamente");
                 return;
@@ -54,7 +54,7 @@ namespace Presentacion.WPF.Views
 
         private void FinalDatePicker_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (FinalDatePicker.SelectedDate > InitialDatePicker.SelectedDate)
+            if (FinalDatePicker.SelectedDate < InitialDatePicker.SelectedDate)
             {
                 MessageBox.Show("La fecha final no debe ser menor a la inicial, intente nuevamente");
                 return;
@@ -77,7 +77,7 @@ namespace Presentacion.WPF.Views
                 return;
             }
 
-            if(EntryTypesCbo.SelectedIndex == -1)
+            if (EntryTypesCbo.SelectedIndex == -1)
             {
                 MessageBox.Show("Por favor seleccione un tipo de movimiento e intente nuevamente");
                 return;
@@ -124,7 +124,7 @@ namespace Presentacion.WPF.Views
         {
             try
             {
-                if(SearchTicketsCommand != null)
+                if (SearchTicketsCommand != null)
                 {
                     ((SearchTicketsViewModel)DataContext).LicensePlate = LicenseTextBox.Text;
                     SearchTicketsCommand.Execute(null);

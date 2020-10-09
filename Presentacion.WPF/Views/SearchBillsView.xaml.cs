@@ -37,7 +37,7 @@ namespace Presentacion.WPF.Views
         #region Events
         private void InitialDatePicker_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (FinalDatePicker.SelectedDate > InitialDatePicker.SelectedDate)
+            if (FinalDatePicker.SelectedDate < InitialDatePicker.SelectedDate)
             {
                 MessageBox.Show("La fecha final debe ser mayor a la inicial, intente nuevamente");
                 return;
@@ -48,7 +48,7 @@ namespace Presentacion.WPF.Views
 
         private void FinalDatePicker_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (FinalDatePicker.SelectedDate > InitialDatePicker.SelectedDate)
+            if (FinalDatePicker.SelectedDate < InitialDatePicker.SelectedDate)
             {
                 MessageBox.Show("La fecha final no debe ser menor a la inicial, intente nuevamente");
                 return;
