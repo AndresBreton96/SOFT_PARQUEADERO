@@ -269,7 +269,7 @@ namespace Presentacion.WPF.Views
                     return false;
                 }
 
-                if (!ValidationMethods.IsUsername(UserNameTxtBox.Text))
+                if (ValidationMethods.IsUsername(UserNameTxtBox.Text))
                 {
                     MessageBox.Show("El nombre de usuario contiene caracteres no permitidos.");
                     UserNameTxtBox.Focus();

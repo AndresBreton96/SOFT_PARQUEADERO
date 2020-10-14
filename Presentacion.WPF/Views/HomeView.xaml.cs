@@ -43,11 +43,6 @@ namespace Presentacion.WPF.Views
             UpdateCurrentViewModel(ViewType.RegisterEntry);
         }
 
-        private void btnRegisterDeparture_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateCurrentViewModel(ViewType.RegisterDeparture);
-        }
-
         private void btnSearchTickets_Click(object sender, RoutedEventArgs e)
         {
             UpdateCurrentViewModel(ViewType.SearchTickets);

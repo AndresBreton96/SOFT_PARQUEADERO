@@ -40,17 +40,13 @@
                     SearchTicketsCommand="{Binding SearchTicketsCommand}"/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:RegisterDepartureViewModel}">
-                <views:RegisterDepartureView 
+            <DataTemplate DataType="{x:Type viewmodels:RegisterEntryViewModel}">
+                <views:RegisterEntryView
+                    SaveEntryTicketCommand="{Binding SaveEntryTicketCommand}"
                     CalculatePriceCommand="{Binding CalculatePriceCommand}"
                     SaveDepartureTicketCommand="{Binding SaveDepartureTicketCommand}"
                     RunDialogCommand="{Binding RunDialogCommand}"
                     CreateBillCommand="{Binding CreateBillCommand}"/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:RegisterEntryViewModel}">
-                <views:RegisterEntryView
-                    SaveEntryTicketCommand="{Binding SaveEntryTicketCommand}"/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:ModifyPricesViewModel}">

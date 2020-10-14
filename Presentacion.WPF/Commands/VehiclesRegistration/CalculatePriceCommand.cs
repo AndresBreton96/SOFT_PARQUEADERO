@@ -16,9 +16,9 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
     public class CalculatePriceCommand : ICommand
     {
         #region Constructor
-        public CalculatePriceCommand(RegisterDepartureViewModel registerDepartureViewModel, ITicketsAdministrator ticketsAdministrator, IRatesAdministrator ratesAdministrator)
+        public CalculatePriceCommand(RegisterEntryViewModel registerEntryViewModel, ITicketsAdministrator ticketsAdministrator, IRatesAdministrator ratesAdministrator)
         {
-            _registerDepartureViewModel = registerDepartureViewModel;
+            _registerEntryViewModel = registerEntryViewModel;
             _ticketsAdministrator = ticketsAdministrator;
             _ratesAdministrator = ratesAdministrator;
         }
@@ -26,7 +26,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
         #endregion
 
         #region Variables
-        private readonly RegisterDepartureViewModel _registerDepartureViewModel;
+        private readonly RegisterEntryViewModel _registerEntryViewModel;
         private readonly ITicketsAdministrator _ticketsAdministrator;
         private readonly IRatesAdministrator _ratesAdministrator;
 
@@ -68,7 +68,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
                     }
 
                     var departureTime = DateTime.Now;
-                    _registerDepartureViewModel.DepartureTime = departureTime;
+                    _registerEntryViewModel.DepartureTime = departureTime;
 
 
                     var timeToCharge = Math.Ceiling((departureTime - entryTicket.EntryDate).TotalMinutes);
@@ -76,15 +76,15 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
                     {
                         var hours = 0.00;
                         var fractions = 1.00;
-                        _registerDepartureViewModel.Hours = hours;
-                        _registerDepartureViewModel.Fractions = fractions;
+                        _registerEntryViewModel.Hours = hours;
+                        _registerEntryViewModel.Fractions = fractions;
                     }
                     else if (timeToCharge <= hourlyRate.Time)
                     {
                         var hours = 1.00;
                         var fractions = 0.00;
-                        _registerDepartureViewModel.Hours = hours;
-                        _registerDepartureViewModel.Fractions = fractions;
+                        _registerEntryViewModel.Hours = hours;
+                        _registerEntryViewModel.Fractions = fractions;
                     }
                     else
                     {
@@ -99,8 +99,8 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
                         {
                             fractions = 1.00;
                         }
-                        _registerDepartureViewModel.Hours = hours;
-                        _registerDepartureViewModel.Fractions = fractions;
+                        _registerEntryViewModel.Hours = hours;
+                        _registerEntryViewModel.Fractions = fractions;
                     }
                 }
             }

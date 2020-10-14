@@ -12,6 +12,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
@@ -21,16 +22,36 @@
                     </Grid.ColumnDefinitions>
                     <materialDesign:PackIcon Kind="PresenceEnter" Width="100" Height="100" />
                     <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap" FontWeight="Bold">REGISTRAR ENTRADA</TextBlock>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" TextWrapping="Wrap" FontWeight="Bold">REGISTRAR MOVIMIENTO</TextBlock>
                     </StackPanel>
                 </Grid>
 
                 <TextBox
                     Grid.Row="1"
                     x:Name="PlatesTextBox"
-                    materialDesign:HintAssist.Hint=""
+                    materialDesign:HintAssist.Hint="Entrada"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     KeyDown="PlatesTextBox_KeyDown"
+                    CharacterCasing="Upper"
+                    Width="500" 
+                    Height="249"
+                    FontSize="120"
+                    TextAlignment="Center"
+                    Padding="0,0,0,0">
+                    <TextBox.Background>
+                        <ImageBrush 
+                            x:Name="TxtBackground" 
+                            AlignmentX="Right" 
+                            Stretch="Fill"/>
+                    </TextBox.Background>
+                </TextBox>
+                
+                <TextBox
+                    Grid.Row="2"
+                    x:Name="DeparturePlatesTextBox"
+                    materialDesign:HintAssist.Hint="Salida"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    KeyDown="DeparturePlatesTextBox_KeyDown"
                     CharacterCasing="Upper"
                     Width="500" 
                     Height="249"
@@ -39,7 +60,7 @@
                     Padding="0,15,0,0">
                     <TextBox.Background>
                         <ImageBrush 
-                            x:Name="TxtBackground" 
+                            x:Name="DepartureTxtBackground"
                             AlignmentX="Right" 
                             Stretch="Fill"/>
                     </TextBox.Background>

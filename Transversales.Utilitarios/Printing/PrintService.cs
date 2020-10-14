@@ -91,9 +91,9 @@ namespace Transversales.Utilitarios.Printing
                 <td style='width: 33%;' >Fecha</td>
             </thead>
             <tr>
-                <td class='bordeDerecho contenidoTabla'>{bill.EntryDate.ToLongDateString()}</td>
-                <td class='bordeDerecho contenidoTabla'>{bill.DepartureDate.ToLongDateString()}</td>
-                <td class='contenidoTabla'>{bill.BillDate.ToShortDateString()}</td>
+                <td class='bordeDerecho contenidoTabla'>{bill.EntryDate:dd/MM/yyyy HH:mm}</td>
+                <td class='bordeDerecho contenidoTabla'>{bill.DepartureDate:dd/MM/yyyy HH:mm}</td>
+                <td class='contenidoTabla'>{bill.BillDate:dd/MM/yyyy}</td>
             </tr>
         </table>
     </div>
@@ -211,8 +211,8 @@ namespace Transversales.Utilitarios.Printing
                 <td style='width: 33%;' >Placas del Vehículo</td>
             </thead>
             <tr>
-                <td class='bordeDerecho contenidoTabla'>{ticket.EntryDate.ToShortTimeString()}</td>
-                <td class='bordeDerecho contenidoTabla'>{ticket.EntryDate.ToShortDateString()}</td>
+                <td class='bordeDerecho contenidoTabla'>{ticket.EntryDate:HH:mm}</td>
+                <td class='bordeDerecho contenidoTabla'>{ticket.EntryDate:dd/MM/yyyy}</td>
                 <td class='contenidoTabla'>{ticket.LicensePlate}</td>
             </tr>
         </table>

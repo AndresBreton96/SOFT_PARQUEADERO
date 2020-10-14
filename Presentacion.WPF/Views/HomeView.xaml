@@ -63,17 +63,6 @@
                                     <TextBlock
                                         Text="Registrar Entrada" />
                                 </Button>
-                                <Button
-                                    x:Name="btnRegisterDeparture"
-                                    Click="btnRegisterDeparture_Click"
-                                    Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                    Height="50"
-                                    materialDesign:ButtonAssist.CornerRadius="5"
-                                    Margin="0 10 0 0"
-                                    Visibility="{Binding RegisterDeparture}">
-                                    <TextBlock
-                                        Text="Registrar Salida" />
-                                </Button>
                             </StackPanel>
                         </materialDesign:Card>
                         <materialDesign:Card Width="380" Margin="8 2 4 16" Height="400">

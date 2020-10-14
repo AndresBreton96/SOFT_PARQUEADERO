@@ -130,23 +130,26 @@ namespace Negocio.General.Users
 
             using (var scope = new TransactionScope())
             {
-                _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[SystemUsers]
-                                                 VALUES
-                                                    ({lastId + 1}
-                                                    ,'{user.FirstName}'
-                                                    ,'{user.LastName}'
-                                                    ,'{user.UserName}'
-                                                    ,'{_passwordHasher.HashPassword(user.Password)}'
-                                                    ,GETDATE())");
+                var query1 = $@"INSERT INTO [dbo].[SystemUsers]
+                                VALUES
+                                ({lastId + 1}
+                                ,'{user.FirstName}'
+                                ,'{user.LastName}'
+                                ,'{user.UserName}'
+                                ,'{_passwordHasher.HashPassword(user.Password)}'
+                                ,GETDATE())";
+                _repositorio.ExecuteQuery(query1);
 
+                var query2 = "";
                 foreach (var menu in user.Menus)
                 {
-                    _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[UsersMenu]
-                                                     VALUES
-                                                        ({lastId + 1}
-                                                        ,{menu.MenuId}
-                                                        ,'{menu.MenuView}'
-                                                        ,'{menu.Permission}')");
+                    query2 = $@"INSERT INTO [dbo].[UsersMenu]
+                                VALUES
+                                ({lastId + 1}
+                                ,{menu.MenuId}
+                                ,'{menu.MenuView}'
+                                ,'{menu.Permission}')";
+                    _repositorio.ExecuteQuery(query2);
                 }
 
                 scope.Complete();

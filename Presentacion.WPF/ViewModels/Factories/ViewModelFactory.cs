@@ -10,7 +10,6 @@ namespace Presentacion.WPF.ViewModels.Factories
                                 CreateViewModel<LoginViewModel> createLoginViewModel,
                                 CreateViewModel<ModifyPricesViewModel> createModifyPricesViewModel,
                                 CreateViewModel<RegisterEntryViewModel> createRegisterEntryViewModel,
-                                CreateViewModel<RegisterDepartureViewModel> createRegisterDepartureViewModel,
                                 CreateViewModel<SearchTicketsViewModel> createSearchTicketsViewModel,
                                 CreateViewModel<SearchBillsViewModel> createSearchBillsViewModel, CreateViewModel<UsersViewModel> createUsersViewModel)
         {
@@ -18,7 +17,6 @@ namespace Presentacion.WPF.ViewModels.Factories
             _createLoginViewModel = createLoginViewModel;
             _createModifyPricesViewModel = createModifyPricesViewModel;
             _createRegisterEntryViewModel = createRegisterEntryViewModel;
-            _createRegisterDepartureViewModel = createRegisterDepartureViewModel;
             _createSearchTicketsViewModel = createSearchTicketsViewModel;
             _createSearchBillsViewModel = createSearchBillsViewModel;
             _createUsersViewModel = createUsersViewModel;
@@ -31,7 +29,6 @@ namespace Presentacion.WPF.ViewModels.Factories
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<ModifyPricesViewModel> _createModifyPricesViewModel;
         private readonly CreateViewModel<RegisterEntryViewModel> _createRegisterEntryViewModel;
-        private readonly CreateViewModel<RegisterDepartureViewModel> _createRegisterDepartureViewModel;
         private readonly CreateViewModel<SearchTicketsViewModel> _createSearchTicketsViewModel;
         private readonly CreateViewModel<SearchBillsViewModel> _createSearchBillsViewModel;
         private readonly CreateViewModel<UsersViewModel> _createUsersViewModel;
@@ -51,8 +48,6 @@ namespace Presentacion.WPF.ViewModels.Factories
                     return _createModifyPricesViewModel();
                 case ViewType.RegisterEntry:
                     return _createRegisterEntryViewModel();
-                case ViewType.RegisterDeparture:
-                    return _createRegisterDepartureViewModel();
                 case ViewType.SearchTickets:
                     return _createSearchTicketsViewModel();
                 case ViewType.SearchBills:

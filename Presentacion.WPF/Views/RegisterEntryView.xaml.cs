@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Transversales.Modelos.Exceptions;
 using Transversales.Modelos.RegistrationEntries;
 
 namespace Presentacion.WPF.Views
@@ -24,6 +25,7 @@ namespace Presentacion.WPF.Views
             InitializeComponent();
 
             TxtBackground.ImageSource = new BitmapImage(new Uri($"{AppDomain.CurrentDomain.BaseDirectory}\\Resources\\Ppar.jpg"));
+            DepartureTxtBackground.ImageSource = new BitmapImage(new Uri($"{AppDomain.CurrentDomain.BaseDirectory}\\Resources\\Ppar.jpg"));
         }
 
         #endregion
@@ -32,10 +34,46 @@ namespace Presentacion.WPF.Views
         public static readonly DependencyProperty SaveEntryTicketCommandProperty =
             DependencyProperty.Register("SaveEntryTicketCommand", typeof(ICommand), typeof(RegisterEntryView), new PropertyMetadata(null));
 
+        public static readonly DependencyProperty CalculatePriceCommandProperty =
+            DependencyProperty.Register("CalculatePriceCommand", typeof(ICommand), typeof(RegisterEntryView), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty SaveDepartureTicketCommandProperty =
+            DependencyProperty.Register("SaveDepartureTicketCommand", typeof(ICommand), typeof(RegisterEntryView), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty RunDialogCommandProperty =
+            DependencyProperty.Register("RunDialogCommand", typeof(ICommand), typeof(RegisterEntryView), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty CreateBillCommandProperty =
+            DependencyProperty.Register("CreateBillCommand", typeof(ICommand), typeof(RegisterEntryView), new PropertyMetadata(null));
+
         public ICommand SaveEntryTicketCommand
         {
             get { return (ICommand)GetValue(SaveEntryTicketCommandProperty); }
             set { SetValue(SaveEntryTicketCommandProperty, value); }
+        }
+
+        public ICommand CalculatePriceCommand
+        {
+            get { return (ICommand)GetValue(CalculatePriceCommandProperty); }
+            set { SetValue(CalculatePriceCommandProperty, value); }
+        }
+
+        public ICommand SaveDepartureTicketCommand
+        {
+            get { return (ICommand)GetValue(SaveDepartureTicketCommandProperty); }
+            set { SetValue(SaveDepartureTicketCommandProperty, value); }
+        }
+
+        public ICommand RunDialogCommand
+        {
+            get { return (ICommand)GetValue(RunDialogCommandProperty); }
+            set { SetValue(RunDialogCommandProperty, value); }
+        }
+
+        public ICommand CreateBillCommand
+        {
+            get { return (ICommand)GetValue(CreateBillCommandProperty); }
+            set { SetValue(CreateBillCommandProperty, value); }
         }
 
         #endregion
@@ -47,6 +85,18 @@ namespace Presentacion.WPF.Views
             {
                 case Key.Enter:
                     RegisterVehicleEntryAsync();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void DeparturePlatesTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    CreateBill();
                     break;
                 default:
                     break;
@@ -100,6 +150,104 @@ namespace Presentacion.WPF.Views
             MessageBox.Show("No ha sido posible inicializar el comando de guardado");
             PlatesTextBox.Focus();
 
+        }
+
+        private void CreateBill()
+        {
+            try
+            {
+
+                if (CalculatePriceCommand != null)
+                {
+                    CalculatePriceCommand.Execute(PlatesTextBox.Text);
+                    ((RegisterEntryViewModel)DataContext).Plates = PlatesTextBox.Text;
+
+                    //if ((((RegisterEntryViewModel)DataContext).Fractions > 1 && ((RegisterEntryViewModel)DataContext).Hours == 0) || (((RegisterEntryViewModel)DataContext).Fractions != 0 && ((RegisterEntryViewModel)DataContext).Hours != 0))                 
+                    //{
+                    //    if (RunDialogCommand != null)
+                    //    {
+                    //        RunDialogCommand.Execute(null);
+                    //        PlatesTextBox.Text = string.Empty;
+                    //        return;
+                    //    }
+                    //    MessageBox.Show("No se ha podido inicializar el comando para mostrar el diálogo.");
+                    //    ((RegisterEntryViewModel)DataContext).Plates = null;
+                    //    PlatesTextBox.Text = string.Empty;
+                    //    return;
+                    //}
+
+                    if (SaveDepartureTicketCommand != null)
+                    {
+                        var ticket = new Tickets()
+                        {
+                            TicketId = 0,
+                            EntryTicketId = 0,
+                            EntryType = EntryType.Salida,
+                            LicensePlate = PlatesTextBox.Text,
+                            EntryDate = ((RegisterEntryViewModel)DataContext).DepartureTime
+                        };
+
+                        SaveDepartureTicketCommand.Execute(ticket);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podido inicializar el comando para crear guardar el ticket de salida.");
+                        ((RegisterEntryViewModel)DataContext).Plates = null;
+                        PlatesTextBox.Text = string.Empty;
+                        return;
+                    }
+
+                    if (CreateBillCommand != null)
+                    {
+                        CreateBillCommand.Execute(PlatesTextBox.Text);
+                        ((RegisterEntryViewModel)DataContext).Plates = null;
+                        PlatesTextBox.Text = string.Empty;
+
+                        var priceMessageDialog = new ChargedPriceDialog()
+                        {
+                            Message = { Text = ((RegisterEntryViewModel)DataContext).Price.ToString("C") }
+                        };
+
+                        DialogHost.Show(priceMessageDialog, "RootDialog");
+                        return;
+                    }
+
+                    MessageBox.Show("No se ha podido inicializar el comando para crear la factura.");
+                    ((RegisterEntryViewModel)DataContext).Plates = null;
+                    PlatesTextBox.Text = string.Empty;
+
+                    return;
+
+                }
+                MessageBox.Show("No se ha podido inicializar el comando para calcular el precio.");
+                ((RegisterEntryViewModel)DataContext).Plates = null;
+                PlatesTextBox.Text = string.Empty;
+
+            }
+            catch (TicketNotFoundException)
+            {
+                ((RegisterEntryViewModel)DataContext).Plates = null;
+                PlatesTextBox.Text = string.Empty;
+                return;
+            }
+            catch (EntryTicketNotFoundException)
+            {
+                ((RegisterEntryViewModel)DataContext).Plates = null;
+                PlatesTextBox.Text = string.Empty;
+                return;
+            }
+            catch (DepartureTicketAlreadyRegistered)
+            {
+                ((RegisterEntryViewModel)DataContext).Plates = null;
+                PlatesTextBox.Text = string.Empty;
+                return;
+            }
+            catch (Exception)
+            {
+                ((RegisterEntryViewModel)DataContext).Plates = null;
+                PlatesTextBox.Text = string.Empty;
+                return;
+            }
         }
 
         #endregion

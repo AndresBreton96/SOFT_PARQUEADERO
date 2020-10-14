@@ -16,9 +16,9 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
     public class CreateBillCommand : ICommand
     {
         #region Constructor
-        public CreateBillCommand(RegisterDepartureViewModel registerDepartureViewModel, ITicketsAdministrator ticketsAdministrator, IRatesAdministrator ratesAdministrator, IBillsAdministrator billsAdministrator)
+        public CreateBillCommand(RegisterEntryViewModel registerEntryViewModel, ITicketsAdministrator ticketsAdministrator, IRatesAdministrator ratesAdministrator, IBillsAdministrator billsAdministrator)
         {
-            _registerDepartureViewModel = registerDepartureViewModel;
+            _registerEntryViewModel = registerEntryViewModel;
             _ticketsAdministrator = ticketsAdministrator;
             _ratesAdministrator = ratesAdministrator;
             _billsAdministrator = billsAdministrator;
@@ -27,7 +27,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
         #endregion
 
         #region Variables
-        private readonly RegisterDepartureViewModel _registerDepartureViewModel;
+        private readonly RegisterEntryViewModel _registerEntryViewModel;
         private readonly ITicketsAdministrator _ticketsAdministrator;
         private readonly IRatesAdministrator _ratesAdministrator;
         private readonly IBillsAdministrator _billsAdministrator;
@@ -71,9 +71,9 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
 
                     var departureTicket = _ticketsAdministrator.GetDepartureTicket(entryTicket.TicketId);
 
-                    var time = _registerDepartureViewModel.Hours * hourlyRate.Time + _registerDepartureViewModel.Fractions * fractionaryRate.Time;
+                    var time = _registerEntryViewModel.Hours * hourlyRate.Time + _registerEntryViewModel.Fractions * fractionaryRate.Time;
 
-                    var price = (_registerDepartureViewModel.Hours * hourlyRate.Value ) + _registerDepartureViewModel.Fractions * fractionaryRate.Value;
+                    var price = (_registerEntryViewModel.Hours * hourlyRate.Value ) + _registerEntryViewModel.Fractions * fractionaryRate.Value;
 
                     var bill = new Bills()
                     {
@@ -91,7 +91,7 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
 
                     _billsAdministrator.AddBill(bill);
 
-                    _registerDepartureViewModel.Price = price;
+                    _registerEntryViewModel.Price = price;
                 }
             }
             catch (TicketNotFoundException ex)

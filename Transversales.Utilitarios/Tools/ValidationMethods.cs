@@ -13,7 +13,7 @@ namespace Transversales.Utilitarios.Tools
             pattern = @"[^ \""\']+$";
 
             Regex regex = new Regex(pattern);
-            return regex.IsMatch(username);
+            return !regex.IsMatch(username);
         }
 
         public static bool ValidatePassword(string password, out string ErrorMessage)

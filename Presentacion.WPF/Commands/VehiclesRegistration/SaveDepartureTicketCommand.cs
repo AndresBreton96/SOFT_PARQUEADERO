@@ -11,16 +11,16 @@ namespace Presentacion.WPF.Commands.VehiclesRegistration
     public class SaveDepartureTicketCommand : ICommand
     {
         #region Constructor
-        public SaveDepartureTicketCommand(RegisterDepartureViewModel registerDepartureViewModel, ITicketsAdministrator ticketsAdministrator)
+        public SaveDepartureTicketCommand(RegisterEntryViewModel registerEntryViewModel, ITicketsAdministrator ticketsAdministrator)
         {
-            _registerDepartureViewModel = registerDepartureViewModel;
+            _registerEntryViewModel = registerEntryViewModel;
             _ticketsAdministrator = ticketsAdministrator;
         }
 
         #endregion
 
         #region Variables
-        private readonly RegisterDepartureViewModel _registerDepartureViewModel;
+        private readonly RegisterEntryViewModel _registerEntryViewModel;
         private readonly ITicketsAdministrator _ticketsAdministrator;
 
         public event EventHandler CanExecuteChanged;

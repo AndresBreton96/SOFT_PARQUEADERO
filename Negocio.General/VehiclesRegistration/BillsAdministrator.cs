@@ -63,19 +63,20 @@ namespace Negocio.General.VehiclesRegistration
 
                 using (var scope = new TransactionScope())
                 {
-                    _repositorio.ExecuteQuery($@"INSERT INTO [dbo].[Bills]
-                                                 VALUES
-                                                    ({bill.BillId}
-                                                    ,{bill.Consecutive}
-                                                    ,'{bill.LicensePlate}'
-                                                    ,{bill.ParkingCharged}
-                                                    ,{bill.ParkingTime}
-                                                    ,{bill.EntryTicketId}
-                                                    ,{bill.DepartureTicketId}
-                                                    ,{bill.Rate}
-                                                    ,'{bill.EntryDate:yyyy-MM-dd HH:mm:ss}'
-                                                    ,'{bill.DepartureDate:yyyy-MM-dd HH:mm:ss}'
-                                                    ,'{bill.BillDate:yyyy-MM-dd HH:mm:ss}')");
+                    var query = $@"INSERT INTO [dbo].[Bills]
+                                   VALUES
+                                   ({bill.BillId}
+                                   ,{bill.Consecutive}
+                                   ,'{bill.LicensePlate}'
+                                   ,{bill.ParkingCharged}
+                                   ,{bill.ParkingTime.ToString().Replace(',','.')}
+                                   ,{bill.EntryTicketId}
+                                   ,{bill.DepartureTicketId}
+                                   ,{bill.Rate}
+                                   ,'{bill.EntryDate:yyyy-MM-dd HH:mm:ss}'
+                                   ,'{bill.DepartureDate:yyyy-MM-dd HH:mm:ss}'
+                                   ,'{bill.BillDate:yyyy-MM-dd HH:mm:ss}')";
+                    _repositorio.ExecuteQuery(query);
 
                     PrintService.GenerateDepartureTicket(bill);
                     scope.Complete();

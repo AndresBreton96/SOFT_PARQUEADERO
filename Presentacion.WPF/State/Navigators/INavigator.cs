@@ -9,7 +9,6 @@ namespace Presentacion.WPF.State.Navigators
         Home,
         ModifyPrices,
         RegisterEntry,
-        RegisterDeparture,
         SearchTickets,
         SearchBills,
         Users
