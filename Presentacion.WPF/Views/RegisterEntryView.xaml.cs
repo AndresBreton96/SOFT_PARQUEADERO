@@ -159,8 +159,8 @@ namespace Presentacion.WPF.Views
 
                 if (CalculatePriceCommand != null)
                 {
-                    CalculatePriceCommand.Execute(PlatesTextBox.Text);
-                    ((RegisterEntryViewModel)DataContext).Plates = PlatesTextBox.Text;
+                    CalculatePriceCommand.Execute(DeparturePlatesTextBox.Text);
+                    ((RegisterEntryViewModel)DataContext).Plates = DeparturePlatesTextBox.Text;
 
                     //if ((((RegisterEntryViewModel)DataContext).Fractions > 1 && ((RegisterEntryViewModel)DataContext).Hours == 0) || (((RegisterEntryViewModel)DataContext).Fractions != 0 && ((RegisterEntryViewModel)DataContext).Hours != 0))                 
                     //{
@@ -183,7 +183,7 @@ namespace Presentacion.WPF.Views
                             TicketId = 0,
                             EntryTicketId = 0,
                             EntryType = EntryType.Salida,
-                            LicensePlate = PlatesTextBox.Text,
+                            LicensePlate = DeparturePlatesTextBox.Text,
                             EntryDate = ((RegisterEntryViewModel)DataContext).DepartureTime
                         };
 
@@ -193,15 +193,15 @@ namespace Presentacion.WPF.Views
                     {
                         MessageBox.Show("No se ha podido inicializar el comando para crear guardar el ticket de salida.");
                         ((RegisterEntryViewModel)DataContext).Plates = null;
-                        PlatesTextBox.Text = string.Empty;
+                        DeparturePlatesTextBox.Text = string.Empty;
                         return;
                     }
 
                     if (CreateBillCommand != null)
                     {
-                        CreateBillCommand.Execute(PlatesTextBox.Text);
+                        CreateBillCommand.Execute(DeparturePlatesTextBox.Text);
                         ((RegisterEntryViewModel)DataContext).Plates = null;
-                        PlatesTextBox.Text = string.Empty;
+                        DeparturePlatesTextBox.Text = string.Empty;
 
                         var priceMessageDialog = new ChargedPriceDialog()
                         {
@@ -214,38 +214,38 @@ namespace Presentacion.WPF.Views
 
                     MessageBox.Show("No se ha podido inicializar el comando para crear la factura.");
                     ((RegisterEntryViewModel)DataContext).Plates = null;
-                    PlatesTextBox.Text = string.Empty;
+                    DeparturePlatesTextBox.Text = string.Empty;
 
                     return;
 
                 }
                 MessageBox.Show("No se ha podido inicializar el comando para calcular el precio.");
                 ((RegisterEntryViewModel)DataContext).Plates = null;
-                PlatesTextBox.Text = string.Empty;
+                DeparturePlatesTextBox.Text = string.Empty;
 
             }
             catch (TicketNotFoundException)
             {
                 ((RegisterEntryViewModel)DataContext).Plates = null;
-                PlatesTextBox.Text = string.Empty;
+                DeparturePlatesTextBox.Text = string.Empty;
                 return;
             }
             catch (EntryTicketNotFoundException)
             {
                 ((RegisterEntryViewModel)DataContext).Plates = null;
-                PlatesTextBox.Text = string.Empty;
+                DeparturePlatesTextBox.Text = string.Empty;
                 return;
             }
             catch (DepartureTicketAlreadyRegistered)
             {
                 ((RegisterEntryViewModel)DataContext).Plates = null;
-                PlatesTextBox.Text = string.Empty;
+                DeparturePlatesTextBox.Text = string.Empty;
                 return;
             }
             catch (Exception)
             {
                 ((RegisterEntryViewModel)DataContext).Plates = null;
-                PlatesTextBox.Text = string.Empty;
+                DeparturePlatesTextBox.Text = string.Empty;
                 return;
             }
         }

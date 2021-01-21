@@ -18,7 +18,7 @@ namespace Transversales.Utilitarios.Printing
             var styles = @"
     <style>
         body{          
-            width: 1000px;
+            width: 1100px;
         }
 
         .bordes{
@@ -72,14 +72,14 @@ namespace Transversales.Utilitarios.Printing
                     <img src='{AppDomain.CurrentDomain.BaseDirectory}DAYAs.jpg' alt='' width='100%'></td>
                 <td style='font-size: 40px;'>
                     Luz Yaneth Marin Franco<br>
-                    Nit. 63.342.807 - 7<br>
+                    Nit. 63.342.802 - 7<br>
                     NO responsable de Iva<br>
                     Carrera 6 No. 10-14<br>
                     Piedecuesta - Stder<br>
                     <b>Tel: 654 2389</b></td>
             </tr>
             <tr>
-                <td colspan='2' style='text-align: left; font-size: 50px;'>Ticket No.: <b>{bill.Consecutive}</b></td>
+                <td colspan='2' style='text-align: left; font-size: 50px;'>Factura No.: <b>{bill.Consecutive}</b></td>
             </tr> <!--INFORMACION-->
         </table>
     </div>
@@ -195,7 +195,7 @@ namespace Transversales.Utilitarios.Printing
                     <img src='{AppDomain.CurrentDomain.BaseDirectory}DAYAs.jpg' alt='' width='100%'></td>
                 <td style='font-size: 40px;'>
                     Luz Yaneth Marin Franco<br>
-                    Nit. 63.342.807 - 7<br>
+                    Nit. 63.342.802 - 7<br>
                     NO responsable de Iva<br>
                     Carrera 6 No. 10-14<br>
                     Piedecuesta - Stder<br>
