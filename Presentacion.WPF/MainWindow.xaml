@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{materialDesign:MaterialDesignFont}" 
-        WindowState="Normal"
+        WindowState="Maximized"
         WindowStyle="ThreeDBorderWindow">
     <Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy" />
